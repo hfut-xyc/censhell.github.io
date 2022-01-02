@@ -1,7 +1,3 @@
----
-home: false
-footer: MIT Licensed | © hfut-xyc
----
 # Home
 ## :book:Algorithm
 - <router-link to="/algorithm/list">LinkedList</router-link>

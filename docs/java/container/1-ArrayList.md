@@ -116,3 +116,13 @@ public class ArrayList<E> extends AbstractList<E>
     }
 }
 ```
+
+## Arrays.ArrayList
+- `Arrays.asList()` 将数组转换成列表后，不能使用 add/remove/clear 方法，否则会抛出 `UnsupportedOperationException`
+- 它返回的是Arrays的内部类，也叫ArrayList，但是该类并没有实现集合的修改方法。
+- 它采用了**适配器模式**，只是转换接口，后台的数据仍是数组。
+```java
+    String[] str = new String[] {"a", "b"};     
+    List list = Arrays.asList(str); 
+    str[0] = "c"   // list.get(0)也会随之修改。 
+```
