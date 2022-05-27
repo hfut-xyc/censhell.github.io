@@ -1,3 +1,4 @@
 # Introduction
 
-This repository provides all markdown files and images of [my blog](https://hfut-xyc.github.io) deployed on github, serving as the IMAGE BED of my blog due to the unstablity of image accessing on github.
+This repository has 2 branches, one is `master`, recording all of the raw markdown files of my blog, 
+the other is `html`, containing the built static html files
