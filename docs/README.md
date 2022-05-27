@@ -1,27 +1,26 @@
 # Home
-## :book:Algorithm
-- <router-link to="/algorithm/list">LinkedList</router-link>
-- <router-link to="/algorithm/tree">BinaryTree</router-link>
-- <router-link to="/algorithm/dp">Dynamic Programming</router-link>
-- <router-link to="/algorithm/design">Design Pattern</router-link>
-
+## :book:Computer Basis
+- <router-link to="/cs/algorithm">Algorithm</router-link>
+- <router-link to="/cs/linux">Linux</router-link>
 ## :coffee:Java
-- <router-link to="/java/fundamental">Java Fundamental</router-link>
-- <router-link to="/java/container">Java Container</router-link>
+- <router-link to="/java/basic">Java Basis</router-link>
 - <router-link to="/java/concurrency">Java Concurrency</router-link>
-- <router-link to="/java/io">Java IO</router-link>
-- <router-link to="/java/vm">Java Virtual Machine</router-link>
-- <router-link to="/java/spring">Spring Framework</router-link>
+- <router-link to="/java/vm">Java VM</router-link>
+- <router-link to="/java/spring">Spring</router-link>
 
+- 
 ## :floppy_disk:DataBase
-- <router-link to="/db/mysql/">MySQL</router-link>
-- <router-link to="/db/redis/">Redis</router-link>
-- <router-link to="/db/es/">ElasticSearch</router-link>
+- <router-link to="/db/#mysql">MySQL</router-link>
+- <router-link to="/db/#redis">Redis</router-link>
+- <router-link to="/db/#es">ElasticSearch</router-link>
 
-## :mag:Tool
-- <router-link to="/tool/linux">Linux</router-link>
+## :key:Frontend
+
+
+
+## :mag:DevTool
 - <router-link to="/tool/maven">Maven</router-link>
 - <router-link to="/tool/npm">NPM</router-link>
 - <router-link to="/tool/git">Git</router-link>
-
+- <router-link to="/tool/docker">Docker</router-link>
 

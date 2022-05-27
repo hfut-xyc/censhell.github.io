@@ -1,25 +1,33 @@
+const { shikiPlugin } = require('@vuepress/plugin-shiki')
+
 module.exports = {
   title: 'Notes',
   base: '/',
+  plugins: [
+    shikiPlugin({
+      theme: 'dark-plus'
+    })
+  ],
+  
   themeConfig: {
     logo: 'https://v2.vuepress.vuejs.org/images/hero.png',
     sidebar: 'auto',
     navbar: [
-      { text: 'Home', link: '/' }, 
       {
-        text: 'Algorithm', 
+        text: 'Home',
+        link: '/'
+      },
+      {
+        text: 'Algorithm',
         children: [
-          { text: 'Binary Tree', link: '/algorithm/tree/' },
-          { text: 'Dynamic Programming', link: '/algorithm/dp/' },
-          { text: 'Design Pattern', link: '/algorithm/design/' },
+          { text: 'Design Pattern', link: '/algorithm/design-pattern/' },
+          { text: 'LeetCode', link: '/algorithm/leetcode/' },
         ]
       },
       {
-        text: 'Java', 
+        text: 'Java',
         children: [
-          { text: 'Java Fundamental', link: '/java/fundamental/' },
-          { text: 'Java Container', link: '/java/container/' },
-          { text: 'Java IO', link: '/java/io/' },
+          { text: 'Java Basic', link: '/java/basic/' },
           { text: 'Java Concurrency', link: '/java/concurrency/' },
           { text: 'Java Virtual Machine', link: '/java/vm/' },
           { text: 'Spring Framework', link: '/java/spring/' },
@@ -27,22 +35,16 @@ module.exports = {
       },
       {
         text: 'DataBase',
-        children: [
-          { text: 'MySQL', link: '/db/mysql/' },
-          { text: 'Redis', link: '/db/redis/' },
-          { text: 'ElasticSearch', link: '/db/es/' }
-        ]
+        link: '/db'
       },
       {
         text: 'Tool',
-        children: [
-          { text: 'Linux', link: '/tool/linux/' },
-          { text: 'Maven', link: '/tool/maven/' },
-          { text: 'NPM', link: '/tool/npm/' },
-          { text: 'Git', link: '/tool/git/' },
-        ]
+        link: '/tool'
       },
-      { text: 'GitHub', link: 'https://github.com/hfut-xyc/hfut-xyc.github.io' },
+      {
+        text: 'GitHub',
+        link: 'https://github.com/hfut-xyc/hfut-xyc.github.io'
+      }
     ]
   }
 }
