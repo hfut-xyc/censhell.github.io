@@ -15,9 +15,9 @@ module.exports = {
     searchPlugin({
 
     }),
-    googleAnalyticsPlugin({
+    // googleAnalyticsPlugin({
 
-    }),
+    // }),
   ],
   
   theme: defaultTheme({

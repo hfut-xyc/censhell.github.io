@@ -111,7 +111,7 @@ select * from tb_user
 <tr><td>1</td><td>aaa</td><td>100</td></tr>
 <tr><td>2</td><td>bbb</td><td>200</td></tr>
 <tr><td>3</td><td>ccc</td><td>300</td></tr>
-<tr><td><font color="red">4</font></td><td><font color="red">ddd</font></td><td><font color="red">400</font></td></tr> 
+<tr><td>4</td><td>ddd</td><td>400</td></tr> 
 </table>
 </td>
 <td colspan="1">&nbsp;</td>
@@ -132,7 +132,7 @@ select * from tb_user
 |--|--|--|
 | begin | begin | begin|
 | update tb_user set name=name where balance=150 | | |
-| | insert into tb_user(name, balance) values('ddd', 170) <br/> <font color="red">BLOCKING...</font>| |
+| | insert into tb_user(name, balance) values('ddd', 170) <br/> BLOCKING...| |
 | | |insert into tb_user(name, balance) values('eee', 250) |
 | commit|事务A提交后才执行成功 | commit|
 | |commit | |
