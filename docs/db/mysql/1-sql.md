@@ -1,4 +1,4 @@
-# distinct
+## distinct
 
 ```sql
         tb_user
@@ -18,7 +18,7 @@ select distinct name from tb_user
 |  ccc   |
 ```
 
-# union all
+## union all
 ```sql
         tb_A								 tb_B
 +----+---------+---------+			+----+---------+---------+
@@ -40,7 +40,7 @@ select name from tb_B
 |  ccc   |
 ```
 
-# case when
+## case when
 
 ```sql
 | id   | course  | score |			|  id  |  cpp   |  Java  |

@@ -1,4 +1,4 @@
-# LeetCode算法题
+
 
 ## 链表
 
@@ -52,21 +52,3 @@ class Solution {
 }
 ```
 
-## 动态规划
-
-### 5.最长回文子串
-> [https://leetcode.cn/problems/longest-palindromic-substring/](https://leetcode.cn/problems/longest-palindromic-substring/)
-
-
-### 516.最长回文子序列
-> [https://leetcode-cn.com/problems/longest-palindromic-substring](https://leetcode-cn.com/problems/longest-palindromic-substring)
-
-
-### 1143.最长公共子序列 
-> [https://leetcode-cn.com/problems/longest-common-subsequence](https://leetcode-cn.com/problems/longest-common-subsequence)
-
-
-
-
-### 最长递增子序列
-> [https://leetcode-cn.com/problems/longest-increasing-subsequence](https://leetcode-cn.com/problems/longest-increasing-subsequence)

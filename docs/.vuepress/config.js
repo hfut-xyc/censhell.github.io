@@ -6,7 +6,7 @@ const { googleAnalyticsPlugin } = require('@vuepress/plugin-google-analytics')
 
 
 module.exports = {
-  title: 'Notes',
+  title: 'Notes of CenShell',
   base: '/',
   plugins: [
     shikiPlugin({
@@ -38,26 +38,26 @@ module.exports = {
       {
         text: 'CS',
         children: [
-          { text: 'Algorithm', link: '/cs/algorithm/' },
-          // { text: 'Network', link: '/cs/network/' },
-          { text: 'Opreating System', link: '/cs/os/' },
+          { text: 'Algorithm', link: '/cs/#algorithm' },
+          { text: 'Computer Network', link: '/cs/#network' },
+          { text: 'Opreating System', link: '/cs/#os' },
         ]
       },
       {
         text: 'Java',
         children: [
-          { text: 'Java Basis', link: '/java/basic/' },
-          { text: 'Java Concurrency', link: '/java/concurrent/' },
-          // { text: 'Java VM', link: '/java/vm/' },
-          { text: 'Spring', link: '/java/spring/' },
+          { text: 'Java Basis', link: '/java/#basic' },
+          { text: 'Java Concurrency', link: '/java/#basic' },
+          { text: 'Java VM', link: '/java/#vm' },
+          { text: 'Spring', link: '/java/#spring' },
         ]
       },
       {
         text: 'DataBase',
         children: [
-          { text: 'MySQL', link: '/cs/mysql/' },
-          // { text: 'Network', link: '/cs/network/' },
-          { text: 'Redis', link: '/cs/redis/' },
+          { text: 'MySQL', link: '/db/#mysql' },
+          { text: 'Redis', link: '/db/#redis' },
+          { text: 'ElasticSearch', link: '/db/#es' },
         ]
       },
       {
