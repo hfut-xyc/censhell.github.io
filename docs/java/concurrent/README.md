@@ -1,20 +1,19 @@
 # Java并发
 
 ## 1.基础篇
-- <router-link to="/java/concurrency/1-1-thread-create">线程的创建</router-link>
-- <router-link to="/java/concurrency/1-2-thread-property">线程的属性</router-link>
-- <router-link to="/java/concurrency/1-3-thread-interrupt">线程的中断</router-link>
+- [线程的创建](./1-thread-create.md)
+- [线程的属性](./1-thread-property.md)
+- [线程的中断](./1-thread-interrupt.md)
 
 ## 2.底层原理篇
-- <router-link to="/java/concurrency/2-1-volatile">volatile</router-link>
-- <router-link to="/java/concurrency/2-2-synchronized">synchronized</router-link>
+- [volatile](./2-volatile.md)
+- [synchronized](./2-synchronized.md)
 
 ## 3.JUC工具篇
-- <router-link to="/java/concurrency">线程池</router-link>
-- <router-link to="/java/concurrency">ThreadLocal</router-link>
-- <router-link to="/java/concurrency">Atomic</router-link>
-- <router-link to="/java/concurrency">并发容器</router-link>
-- <router-link to="/java/concurrency">Lock</router-link>
-- <router-link to="/java/concurrency">AQS</router-link>
-- <router-link to="/java/concurrency">ForkJoin</router-link>
-- <router-link to="/java/concurrency">CompletableFuture</router-link>
+- [线程池](./3-ThreadPool.md)
+- [ThreadLocal](./3-ThreadLocal.md)
+- [Atomic](./3-atomic.md)
+- [并发容器](./3-ConcurrentContainer.md)
+- [Lock]()
+- [AQS]()
+- [CompletableFuture]()
