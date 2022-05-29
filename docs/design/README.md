@@ -1,12 +1,12 @@
-# 设计模式
+# Design Patterns
 
 
-## Creational Patterns
+## Creational
 
 
 
-## Structural Patterns
+## Structural
 
 
-## Behavioral Patterns
+## Behavioral
 

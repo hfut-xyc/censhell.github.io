@@ -1,4 +1,9 @@
 # 动态规划
+<div align="center">
+    <a href="https://leetcode.cn/problemset/all/?topicSlugs=dynamic-programming" target="blank"> 
+      <img src="https://badgen.net/badge/LeetCode/Dynamic Programming/orange?icon=sourcegraph&">
+    </a>
+</div>
 
 ## 简单题
 ::: tip

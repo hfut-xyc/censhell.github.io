@@ -39,16 +39,16 @@ module.exports = {
         text: 'CS',
         children: [
           { text: 'Algorithm', link: '/cs/#algorithm' },
-          { text: 'Computer Network', link: '/cs/#network' },
-          { text: 'Opreating System', link: '/cs/#os' },
+          { text: 'Computer Network', link: '/cs/#computer-network' },
+          { text: 'Opreating System', link: '/cs/#operating-system' },
         ]
       },
       {
         text: 'Java',
         children: [
-          { text: 'Java Basis', link: '/java/#basic' },
-          { text: 'Java Concurrency', link: '/java/#basic' },
-          { text: 'Java VM', link: '/java/#vm' },
+          { text: 'Java Basis', link: '/java/#java-basis' },
+          { text: 'Java Concurrency', link: '/java/#java-concurrency' },
+          { text: 'Java VM', link: '/java/#java-vitrual-machine' },
           { text: 'Spring', link: '/java/#spring' },
         ]
       },
@@ -57,7 +57,7 @@ module.exports = {
         children: [
           { text: 'MySQL', link: '/db/#mysql' },
           { text: 'Redis', link: '/db/#redis' },
-          { text: 'ElasticSearch', link: '/db/#es' },
+          { text: 'ElasticSearch', link: '/db/#elasticsearch' },
         ]
       },
       {

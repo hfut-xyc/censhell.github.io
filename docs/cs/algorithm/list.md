@@ -1,10 +1,15 @@
 
 
 ## 链表
+<div align="center">
+    <a href="https://leetcode.cn/problemset/all/?topicSlugs=linked-list" target="blank"> 
+      <img src="https://badgen.net/badge/LeetCode/Linked List/orange?icon=sourcegraph&">
+    </a>
+</div>
 
 ### 2.两数相加
 > [https://leetcode.cn/problems/add-two-numbers/](https://leetcode.cn/problems/add-two-numbers/)
-
+::: details Solution
 ```java
 /**
  * Definition for singly-linked list.
@@ -51,4 +56,4 @@ class Solution {
     }
 }
 ```
-
+:::

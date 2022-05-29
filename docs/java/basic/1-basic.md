@@ -57,8 +57,6 @@ public class Test<T> {
 }
 ```
 
-
-
 ### 泛型方法
 
 ``` java
@@ -67,8 +65,6 @@ public class Test {
     public static <T>     
 }
 ```
-
-
 
 ### Producer Extends Consumer Super
 
@@ -101,29 +97,6 @@ public static <T> void sort(List<T> list, Comparator<? super T> c) {
 }
 ```
 
-## String 
-```java
-String s1 = "abc";            	// constant pool
-String s2 = "a" + "b" + "c"; 
-String s3 = new String("abc"); 	// heap memory
-
-System.out.println(s1 == s2);   // true
-System.out.println(s1 == s3);   // false
-```
-
-```java
-String s1 = "ab";
-String s2 = "abc";
-String s3 = s1 + "c";
-System.out.println(s2 == s3);  // false
-```
-
-```java
-final String s1 = "ab";
-String s2 = "abc";
-String s3 = s1 + "c";
-System.out.println(s2 == s3);  // true
-```
 
 ## 注解
 
