@@ -1,50 +1,55 @@
-# HashMap
+# Map
 
-## 介绍
+## HashMap
+### 介绍
 
-|版本 |实现|并发|
-|---|---|---|
-|Java7 |Hash表+链表，链表采用头插法 |resize操作可能会造成环形链表或数据丢失 |
-|Java8 |Hash表+链表+红黑树，链表采用尾插法 |put操作可能会发生数据覆盖的情况|
+HashMap 是 `java.util.collection` 包下一种常用的数据结构，用于存放键值对，采用拉链法解决 Hash 冲突，是线程不安全的
 
-## 源码分析
-### 常量与成员变量
+Java8 之前，HashMap 的实现基于 `数组+链表`，链表采用 `头插法`
+
+Java8 之后，HashMap 的实现基于 `数组+链表+红黑树`，链表采用 `尾插法`。链表长度达到 8 且数组长度达到 64 会变成红黑树，提高搜索效率
+
+数组长度总是为 2 的幂，这是为了保证 `hash % length == hash & (length - 1)`，采用二进制位操作 &，相对于 % 运算效率更高
+
+HashMap 的键值都可以为 null，但 null 作为键 `只能有一个`，null 作为值可以有多个
+
+### 常量与变量
 
 ``` java
 public class HashMap<K,V> extends AbstractMap<K,V> 
     implements Map<K,V>, Cloneable, Serializable {
   
-    // table数组默认的初始容量为16
+    // table数组默认的初始长度为 16
     static final int DEFAULT_INITIAL_CAPACITY = 1 << 4;   
     
-    // table数组最大容量
+    // table数组最大长度
     static final int MAXIMUM_CAPACITY = 1 << 30; 
     
     // 默认的填充因子
     static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
-    // 链表转为红黑树的必要条件
+    // 链表转为红黑树时，链表长度需要达到 8
     static final int TREEIFY_THRESHOLD = 8;
     
-    // 当桶中的树结点数少于这个值时，红黑树会转为链表
+    // 当桶中的树结点数小于 6 时，红黑树会转为链表
     static final int UNTREEIFY_THRESHOLD = 6;
     
-    // 链表转为红黑树时，table所需的最小长度
+    // 链表转为红黑树时，table 长度需要达到 64
     static final int MIN_TREEIFY_CAPACITY = 64;
 
-    // 存储元素的数组，总是为2的n次幂，这是为了保证 hash % length == hash & (length - 1)
+    // 存放键值对的数组
     transient Node<K,V>[] table;
     
     // 所有键值对的集合
     transient Set<Map.Entry<K,V>> entrySet;
     
-    // 结点数，即 K-V 的数量
+    // 键值对的数量
     transient int size;
     
     // map结构更改次数
     transient int modCount;   
     
-    // 当 size 超过 threshold = capacity * loadFactor，会进行扩容
+    // size >= table.length * loadFactor，数组会进行扩容
     int threshold;
     
     // 加载因子
@@ -52,12 +57,22 @@ public class HashMap<K,V> extends AbstractMap<K,V>
 }
 ```
 
-### 构造函数
-推荐使用 `HashMap(int initialCapacity)`，通过指定默认的容量来减少后续的扩容操作
+### 初始化
+
+HashMap 默认的初始化数组长度为 16，每次扩充后变为原来的 2 倍
+
+::: tip Alibaba Java手册
+- 推荐使用 `HashMap(int initialCapacity)` 初始化，如果无法确定大小，使用默认值 16
+- 通过指定默认的容量可以减少后续的扩容操作，防止影响性能
+:::
 
 ```java
 public HashMap() {
-    this.loadFactor = DEFAULT_LOAD_FACTOR; // all other fields defaulted
+    this.loadFactor = DEFAULT_LOAD_FACTOR;
+}
+
+public HashMap(int initialCapacity) {
+    this(initialCapacity, DEFAULT_LOAD_FACTOR);
 }
 
 public HashMap(int initialCapacity, float loadFactor) {
@@ -70,14 +85,10 @@ public HashMap(int initialCapacity, float loadFactor) {
     this.loadFactor = loadFactor;
     this.threshold = tableSizeFor(initialCapacity);
 }
-
-public HashMap(int initialCapacity) {
-    this(initialCapacity, DEFAULT_LOAD_FACTOR);
-}
 ```
 
-### get
-
+### get 操作
+核心方法为 getNode
 ``` java
 public V get(Object key) {
     Node<K,V> e;
@@ -104,10 +115,11 @@ final Node<K,V> getNode(int hash, Object key) {
     return null;
 }
 ```
+### put 操作
+核心方法为 putVal
+#### putVal
 
-### put
-
-``` java {8,11,14,17,20,23}
+``` java {9,10,57,58}
 public V put(K key, V value) {
     return putVal(hash(key), key, value, false, true);
 }
@@ -121,7 +133,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent, boolean evict) {
     // 2.若桶为空，新结点直接放入桶中
     if ((p = tab[i = (n - 1) & hash]) == null)
         tab[i] = newNode(hash, key, value, null);
-    // 3.若桶中已经存在元素
+    // 3.若桶不为空
     else {
         Node<K,V> e; K k;
         // 3.1 如果桶中第一个结点就和新结点的key匹配，直接覆盖
@@ -169,10 +181,9 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent, boolean evict) {
 } 
 ```
 
-### treeifyBin
+#### treeifyBin
 
-- treeifyBin 并不一定会把链表转为红黑树，当链表长度达到8，但 table 长度不足64时，只会进行扩容
-- 为什么链表长度超过8要变成红黑树：链表结点占用内存更小，链表长度达到8的概率非常小，转为红黑树可以提高查询效率
+treeifyBin 并不一定会把链表转为红黑树，当链表长度达到 8，但 table 长度小于 64 时，只会进行扩容
 
 ``` java{3,4}
 final void treeifyBin(Node<K,V>[] tab, int hash) {
@@ -197,13 +208,13 @@ final void treeifyBin(Node<K,V>[] tab, int hash) {
 }
 ```
 
-### resize
+#### resize
 
-需要执行扩容操作的情况有3种：
+resize 是扩容操作，会触发这一操作的情况只有 3 种：
 
-- table 为 null 或长度为0
-- 键值对的数量超过了阈值 threshold 
-- 链表长度达到 TREEIFY_THRESHOLD，但 table 长度小于 MIN_TREEIFY_CAPACITY 
+- 数组为 null 或数组长度为 0
+- 链表长度达到 8，但数组长度小于 64 
+- 键值对的数量超过了阈值 `table.length * loadFactor`
 
 ``` java
 final Node<K,V>[] resize() {
@@ -285,3 +296,178 @@ final Node<K,V>[] resize() {
     return newTab;
 }
 ```
+## TreeMap
+
+### 介绍
+TreeMap是完全基于红黑树构建的，因此它是有序的
+
+
+### 初始化
+``` java
+public class TreeMap<K,V> extends AbstractMap<K,V>
+    implements NavigableMap<K,V>, Cloneable, java.io.Serializable
+{
+    private final Comparator<? super K> comparator;
+
+    private transient Entry<K,V> root;
+
+    private transient int size = 0;
+
+    private transient int modCount = 0;
+    
+    // 默认构造函数不提供比较器
+    public TreeMap() {
+        comparator = null;
+    }
+}
+```
+
+#### put
+
+``` java
+public V put(K key, V value) {
+    Entry<K,V> t = root;
+    if (t == null) {
+        compare(key, key); // type (and possibly null) check
+
+        root = new Entry<>(key, value, null);
+        size = 1;
+        modCount++;
+        return null;
+    }
+    int cmp;
+    Entry<K,V> parent;
+    Comparator<? super K> cpr = comparator;
+    // 如果提供了默认的比较器
+    if (cpr != null) {
+        do {
+            parent = t;
+            cmp = cpr.compare(key, t.key);
+            if (cmp < 0)
+                t = t.left;
+            else if (cmp > 0)
+                t = t.right;
+            else
+                return t.setValue(value);
+        } while (t != null);
+    }
+    // 如果没有提供比较器
+    else {
+        if (key == null) {
+            throw new NullPointerException();
+            Comparable<? super K> k = (Comparable<? super K>) key;
+        }
+        do {
+            parent = t;
+            cmp = k.compareTo(t.key);
+            if (cmp < 0)
+                t = t.left;
+            else if (cmp > 0)
+                t = t.right;
+            else
+                return t.setValue(value);
+        } while (t != null);
+    }
+    Entry<K,V> e = new Entry<>(key, value, parent);
+    if (cmp < 0)
+        parent.left = e;
+    else
+        parent.right = e;
+    // 插入完成后，从插入节点处开始修正整棵树
+    fixAfterInsertion(e);
+    size++;
+    modCount++;
+    return null;
+}
+```
+
+#### 插入后修正
+``` java
+private void fixAfterInsertion(Entry<K,V> x) {
+    x.color = RED;
+    while (x != null && x != root && x.parent.color == RED) {
+         // 1.若当前节点x的父节点是祖父节点的左子节点
+        if (parentOf(x) == leftOf(parentOf(parentOf(x)))) {
+            Entry<K,V> y = rightOf(parentOf(parentOf(x)));
+            // 若当前节点x的叔叔节点y是红色
+            if (colorOf(y) == RED) {
+                // 将父节点和叔叔节点都变黑，祖父节点变红    
+                setColor(parentOf(x), BLACK);
+                setColor(y, BLACK);
+                setColor(parentOf(parentOf(x)), RED);
+                // 当前节点指向祖父节点，进入下一轮循环
+                x = parentOf(parentOf(x));
+            }
+            // 若当前节点x的叔叔节点y是黑色
+            else {
+                // 2.若当前节点x是其父节点的右子节点，则从x的父节点处左旋
+                if (x == rightOf(parentOf(x))) {
+                    x = parentOf(x);
+                    rotateLeft(x);
+                }
+                // 3.将当前节点x的父节点变黑，祖父节点变红，从祖父节点处右旋
+                setColor(parentOf(x), BLACK);
+                setColor(parentOf(parentOf(x)), RED);
+                rotateRight(parentOf(parentOf(x)));
+            }
+        }
+        // 若父节点是祖父节点的右子节点，操作与上面完全对称          
+        else {
+            Entry<K,V> y = leftOf(parentOf(parentOf(x)));
+            if (colorOf(y) == RED) {
+                setColor(parentOf(x), BLACK);
+                setColor(y, BLACK);
+                setColor(parentOf(parentOf(x)), RED);
+                x = parentOf(parentOf(x));
+            } else {
+                if (x == leftOf(parentOf(x))) {
+                    x = parentOf(x);
+                    rotateRight(x);
+                }
+                setColor(parentOf(x), BLACK);
+                setColor(parentOf(parentOf(x)), RED);
+                rotateLeft(parentOf(parentOf(x)));
+            }
+        }
+    }
+    root.color = BLACK;
+}
+```
+#### rotate
+``` java
+private void rotateLeft(Entry<K,V> p) {
+    if (p != null) {
+        Entry<K,V> r = p.right;
+        p.right = r.left;
+        if (r.left != null)
+            r.left.parent = p;
+        r.parent = p.parent;
+        if (p.parent == null)
+            root = r;
+        else if (p.parent.left == p)
+            p.parent.left = r;
+        else
+            p.parent.right = r;
+        r.left = p;
+        p.parent = r;
+    }
+}
+
+private void rotateRight(Entry<K,V> p) {
+    if (p != null) {
+        Entry<K,V> l = p.left;
+        p.left = l.right;
+        if (l.right != null) l.right.parent = p;
+        l.parent = p.parent;
+        if (p.parent == null)
+            root = l;
+        else if (p.parent.right == p)
+            p.parent.right = l;
+        else p.parent.left = l;
+        l.right = p;
+        p.parent = l;
+    }
+}
+```
+## HashTable
+

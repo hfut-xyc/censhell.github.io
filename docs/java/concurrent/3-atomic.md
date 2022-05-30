@@ -1,8 +1,8 @@
-# CAS与原子类
+# 原子类
 
 ## Compare And Swap
 
-CAS的全称是：比较并交换（Compare And Swap）。在CAS中，有这样三个值：
+CAS的全称是：比较并交换（Compare And Swap）在CAS中，有这样三个值：
 
 - V：要更新的变量(var)
 - E：预期值(expected)

@@ -3,7 +3,7 @@
 ## 链表
 <div align="center">
     <a href="https://leetcode.cn/problemset/all/?topicSlugs=linked-list" target="blank"> 
-      <img src="https://badgen.net/badge/LeetCode/Linked List/orange?icon=sourcegraph&">
+      <img src="https://badgen.net/badge/LeetCode/Linked List/blue?icon=sourcegraph&">
     </a>
 </div>
 

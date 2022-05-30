@@ -1,12 +1,5 @@
 # 并发容器
 
-
-## HashTable
-
-
-## Vector
-
-
 ## ConcurrentHashMap
 
 在JDK1.7中，ConcurrentHashMap采用**Segment + HashEntry**来实现底层结构：

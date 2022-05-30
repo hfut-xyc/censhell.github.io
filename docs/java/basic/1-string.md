@@ -1,4 +1,3 @@
-
 # String
 
 ## 字符串常量池 
@@ -21,5 +20,7 @@ String s2 = "abc";
 String s3 = s1 + "c";
 System.out.println(s2 == s3);  // false
 ```
+
+## 面试题: String 为什么不可变
 
 ## String-StringBuilder-StringBuffer

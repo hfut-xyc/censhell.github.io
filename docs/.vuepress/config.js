@@ -6,7 +6,9 @@ const { googleAnalyticsPlugin } = require('@vuepress/plugin-google-analytics')
 
 
 module.exports = {
-  title: 'Notes of CenShell',
+  title: 'Terminote',
+  head: [['link', { rel: 'icon', href: '/logo.png' }]],
+  open: true,
   base: '/',
   plugins: [
     shikiPlugin({
@@ -21,7 +23,7 @@ module.exports = {
   ],
   
   theme: defaultTheme({
-    logo: 'https://v2.vuepress.vuejs.org/images/hero.png',
+    logo: '/logo.png',
     repo: 'hfut-xyc/hfut-xyc.github.io',
     // config of edit link
     docsRepo: 'https://github.com/hfut-xyc/hfut-xyc.github.io',

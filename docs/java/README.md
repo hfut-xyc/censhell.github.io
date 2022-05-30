@@ -1,18 +1,17 @@
 # Java
 
 ## Java Basis
-### 基本功
-- [Java 基础](./basic/1-basic.md)
+### 基础
+- [基本用法](./basic/1-basic.md)
 - [String](./basic/1-string.md)
 - [DateFormat](./basic/1-dateformat.md)
 - [Lambda](./basic/1-lambda.md)
 - [Stream](./basic/1-stream.md)
 
 ### 集合框架
-- [ArrayList](./basic/2-arraylist.md)
-- [HashMap](./basic/2-hashmap.md)
-- [TreeMap](./basic/2-treemap.md)
-- [HashSet](./basic/2-hashset.md)
+- [ArrayList, LinkedList, Vector](./basic/2-list.md)
+- [HashMap, TreeMap, HashTable](./basic/2-map.md)
+- [HashSet](./basic/2-set.md)
 
 
 ## Java Concurrency
