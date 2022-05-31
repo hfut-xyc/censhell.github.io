@@ -26,11 +26,14 @@ Object obj = new String();	// upcasting
 String str = (String) obj;	// downcasting
 ```
 
-子类引用不能指向父类对象
+子类引用不能指向父类对象，否则会抛出异常
 ```java
 Object obj = new Object();		
 String str = (String) obj;	// ClassCastException
 ```
+
+## 参数传递
+Java 中的函数传参只有值传递，没有引用传递
 
 ## 内部类
 
@@ -67,7 +70,8 @@ java.lang.reflect.Field;
 java.lang.reflect.Method;
 java.lang.reflect.Modifier;
 ```
-**获得Class对象的3种方法**
+
+获得Class对象的3种方法
 
 - `Object.getClass()`
 - `obj.class`

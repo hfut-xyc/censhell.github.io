@@ -30,12 +30,12 @@
 > 本篇主要介绍 JUC 包下常用的并发工具类
 - [线程池](./concurrent/3-ThreadPool.md)
 - [ThreadLocal](./concurrent/3-ThreadLocal.md)
-- [Atomic](./concurrent/3-atomic.md)
-- [并发容器](./concurrent/3-ConcurrentContainer.md)
-- [Lock]()
-- [AQS]()
-- [Future]()
-- [CompletableFuture]()
+- [Atomic 原子类](./concurrent/3-atomic.md)
+- [并发容器](./concurrent/3-container.md)
+- [AQS](./concurrent/3-aqs.md)
+- [Lock](./concurrent/3-lock.md)
+- [Future](./concurrent/3-future1.md)
+- [CompletableFuture](./concurrent/3-future2.md)
 
 ## Java Vitrual Machine
 

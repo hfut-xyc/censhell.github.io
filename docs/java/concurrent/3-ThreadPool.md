@@ -1,8 +1,9 @@
 # 线程池
 
-## 线程池的优点
-- 能够避免频繁地创建与销毁线程
-
+## 为什么要使用线程池
+- 线程池可以复用已创建的线程，这样就可以避免频繁地创建与销毁线程
+- 可以对线程进行统一管理
+- 
 ## 线程池的创建
 
 <div align="center"><img src="https://s2.loli.net/2022/05/21/IMNrpaF7ynP2TLf.png"/></div>
@@ -75,7 +76,7 @@ public class Executors {
 | CachedThreadPool    | 0            | 2147483647  | 60s       | SynchronousQueue    |
 | ScheduledThreadPool | n            | 2147483647  | 0s        | DelayedWorkQueue    |
 
-::: tip Alibaba Java开发手册关于线程池的使用规约
+::: tip
 线程池不允许使用 Executors 去创建，而是通过 ThreadPoolExecutor 的方式，这样的处理方式让人更加明确线程池的运行规则，规避资源耗尽的风险
 
 - `FixedThreadPool`、`SingleThreadPool` 允许的请求队列长度为 Integer.MAX_VALUE，可能会堆积大量的请求，从而导致 OOM 

@@ -1,3 +1,3 @@
 # AQS
 
-Abstract Queue Synchronizer
+Abstract Queued Synchronizer

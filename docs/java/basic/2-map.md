@@ -61,9 +61,9 @@ public class HashMap<K,V> extends AbstractMap<K,V>
 
 HashMap 默认的初始化数组长度为 16，每次扩充后变为原来的 2 倍
 
-::: tip Alibaba Java手册
-- 推荐使用 `HashMap(int initialCapacity)` 初始化，如果无法确定大小，使用默认值 16
-- 通过指定默认的容量可以减少后续的扩容操作，防止影响性能
+::: tip
+推荐使用 `HashMap(int initialCapacity)` 初始化，如果无法确定大小，使用默认值 16
+> 指定默认的容量可以减少后续的扩容操作，防止影响性能
 :::
 
 ```java
