@@ -13,7 +13,7 @@ There are two ways to create a new thread of execution.
 
 One is to declare a class to be a subclass of `Thread`. This subclass should override the `run` method of class `Thread`
 
-The other way to create a thread is to declare a class that implements the `Runnable` interface. That class then implements the `run` method. 
+The other way to create a thread is to declare a class that implements the `Runnable` interface. That class then implements the `run` method.
 :::
 
 演示代码如下，非常简单

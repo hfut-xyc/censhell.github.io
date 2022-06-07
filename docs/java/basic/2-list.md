@@ -1,9 +1,5 @@
----
-sidebarDepth: 3
----
-
 # List
-
+本文主要介绍 ArrayList, LinkedList, Vector, CopyOnWriteArrayList
 ## ArrayList
 
 ### 介绍
@@ -169,3 +165,4 @@ public <T> T[] toArray(T[] a) {
 
 ## Vector
 
+## CopyOnWriteArrayList
