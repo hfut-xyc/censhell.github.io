@@ -10,9 +10,7 @@
 - [Java Concurrency](/java/README.md/#java-concurrency)
 - [Java VM](/java/README.md/#java-vitrual-machine)
 - [Spring](/java/README.md/#spring)
-
-<!-- ## :snake:Python -->
-<!-- ## :mag:Frontend -->
+- [Netty](/java/README.md/#netty)
 
 ## :memo:Design Patterns
 - [Creational Patterns](./design/README.md#creational)

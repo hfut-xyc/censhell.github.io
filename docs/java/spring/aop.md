@@ -1,3 +1,0 @@
-# Aspect-Oriented Programming
-
-

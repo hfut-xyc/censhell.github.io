@@ -6,6 +6,7 @@
 ### 自动装箱与拆箱
 
 ### 基本类型与 String 转换
+下面以 int 类型和 String 为例
 ```java
 // String -> int
 String str = "123";
