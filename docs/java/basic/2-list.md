@@ -164,5 +164,3 @@ public <T> T[] toArray(T[] a) {
 ## LinkedList
 
 ## Vector
-
-## CopyOnWriteArrayList

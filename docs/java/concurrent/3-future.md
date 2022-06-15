@@ -1,6 +1,41 @@
-# CompletableFuture
+# Future & CompletableFuture
 
-## 创建 CompletableFuture
+## Future
+Callable 与 Runnable 相比，主要有以下2个优势：
+- Callable 有返回值
+- Callable 能够抛出异常
+
+```java
+@FunctionalInterface
+public interface Runnable {
+    public abstract void run();
+}
+
+@FunctionalInterface
+public interface Callable<V> {
+    V call() throws Exception;
+}
+```
+
+```java
+public interface Future<V> {
+    boolean cancel(boolean mayInterruptIfRunning);
+    boolean isCancelled();
+    boolean isDone();
+    V get() throws InterruptedException, ExecutionException;
+    V get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException;
+}
+```
+
+``` java
+public interface RunnableFuture<V> extends Runnable, Future<V> {
+    void run();
+}
+```
+
+## CompletableFuture
+
+### 创建 CompletableFuture
 
 ```java
 public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
@@ -23,7 +58,7 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
 }
 ```
 
-## thenApply
+### thenApply
 
 ```java
 public <U> CompletableFuture<U> thenApply(Function<? super T,? extends U> fn) {
@@ -41,7 +76,7 @@ public <U> CompletableFuture<U> thenApplyAsync(Function<? super T,? extends U> f
 
 
 
-## thenAccept
+### thenAccept
 
 ```java
 public CompletableFuture<Void> thenAccept(Consumer<? super T> action) {
@@ -59,7 +94,7 @@ public CompletableFuture<Void> thenAcceptAsync(Consumer<? super T> action, Execu
 
 
 
-## thenRun
+### thenRun
 
 ```java
 public CompletableFuture<Void> thenRun(Runnable action) {
@@ -75,7 +110,7 @@ public CompletableFuture<Void> thenRunAsync(Runnable action, Executor executor) 
 }
 ```
 
-## exceptionally
+### exceptionally
 
 ```java
 public CompletableFuture<T> exceptionally(Function<Throwable, ? extends T> fn) {
@@ -83,7 +118,7 @@ public CompletableFuture<T> exceptionally(Function<Throwable, ? extends T> fn) {
 }
 ```
 
-## thenCompose
+### thenCompose
 
 ```java
 public <U> CompletableFuture<U> thenCompose(Function<? super T, ? extends CompletionStage<U>> fn) {
@@ -100,7 +135,7 @@ public <U> CompletableFuture<U> thenComposeAsync(
 }
 ```
 
-## thenCombine
+### thenCombine
 
 ```java
 public <U,V> CompletableFuture<V> thenCombine(
@@ -121,7 +156,8 @@ public <U,V> CompletableFuture<V> thenCombineAsync(
     return biApplyStage(screenExecutor(executor), other, fn);
 }
 ```
-## allOf anyOf
+
+### allOf anyOf
 
 ```java
 public static CompletableFuture<Void> allOf(CompletableFuture<?>... cfs) {
