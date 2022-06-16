@@ -34,37 +34,22 @@ module.exports = {
     sidebar: 'auto',
     navbar: [
       {
-        text: 'Index',
-        link: '/'
+        text: 'Index', link: '/'
       },
       {
-        text: 'CS',
-        children: [
-          { text: 'Algorithm', link: '/cs/#algorithm' },
-          { text: 'Computer Network', link: '/cs/#computer-network' },
-          { text: 'Opreating System', link: '/cs/#operating-system' },
-        ]
+        text: '计算机基础', link: '/cs'
       },
       {
-        text: 'Java',
-        children: [
-          { text: 'Java Basis', link: '/java/#java-basis' },
-          { text: 'Java Concurrency', link: '/java/#java-concurrency' },
-          { text: 'Java VM', link: '/java/#java-vitrual-machine' },
-          { text: 'Spring', link: '/java/#spring' },
-        ]
+        text: 'Java', link: '/java'
       },
       {
-        text: 'DataBase',
-        children: [
-          { text: 'MySQL', link: '/db/#mysql' },
-          { text: 'Redis', link: '/db/#redis' },
-          { text: 'ElasticSearch', link: '/db/#elasticsearch' },
-        ]
+        text: '设计模式', link: '/design'
       },
       {
-        text: 'Tool',
-        link: '/tool'
+        text: '数据库', link: '/db'
+      },
+      {
+        text: '开发工具', link: '/tool'
       },
     ]
   })

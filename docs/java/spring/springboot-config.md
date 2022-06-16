@@ -1,4 +1,4 @@
-# SpringBoot 配置文件
+# SpringBoot 读取配置文件
 
 SpringBoot 的配置文件主要有 yaml 和 properties 两种格式
 ## @Value

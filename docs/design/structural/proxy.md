@@ -15,7 +15,7 @@
 ```
 ## JDK 动态代理
 
-如果目标对象实现了接口，采用 JDK 动态代理来代理目标对象，本质
+如果目标对象实现了接口，采用 JDK 动态代理来代理目标对象
 ```java
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -47,7 +47,7 @@ public class JdkProxyFactory {
     }
 }
 ```
-
+测试类如下
 ```java
 public class App {
 
@@ -62,8 +62,9 @@ public class App {
         test1();
     }
 }
-
 ```
+
+
 ## CGLib 动态代理
 
 CGLib 是第三方库，使用前需要引入 maven 依赖

@@ -1,5 +1,5 @@
 # Map
-本文主要介绍 HashMap, TreeMap, HashTable, ConcurrentHashMap
+本文主要介绍集合框架中的 HashMap, TreeMap, HashTable
 ## HashMap
 ### 介绍
 

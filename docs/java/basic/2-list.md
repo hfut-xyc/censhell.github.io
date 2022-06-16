@@ -1,5 +1,5 @@
 # List
-本文主要介绍 ArrayList, LinkedList, Vector, CopyOnWriteArrayList
+本文主要介绍 ArrayList, LinkedList, Vector
 ## ArrayList
 
 ### 介绍

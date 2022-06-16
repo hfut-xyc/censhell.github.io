@@ -8,35 +8,48 @@ Abstract Queued Synchronizer
 
 ### 按序打印
 [](https://leetcode.cn/problems/print-in-order/)
+
 ``` java
-class Foo {
+import java.util.concurrent.Semaphore;
 
-    private Semaphore second = new Semaphore(0);
-    private Semaphore third = new Semaphore(0);    
+public class PrintInOrder {
 
-    public Foo() {}
+    private static Semaphore second = new Semaphore(0);
+    private static Semaphore third = new Semaphore(0);
 
-    public void first() throws InterruptedException {
+    public static void first()  {
         System.out.println("first");
         second.release();
     }
 
-    public void second() throws InterruptedException {
-        second.acquire();
+    public static void second()  {
+        try {
+            second.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println("second");
         third.release();
     }
 
-    public void third() throws InterruptedException {
-        third.acquire();
+    public static void third()  {
+        try {
+            third.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println("third");
     }
 
     public static void main(String[] args) {
-        Thread
+        Thread t1 = new Thread(PrintInOrder::first);
+        Thread t2 = new Thread(PrintInOrder::second);
+        Thread t3 = new Thread(PrintInOrder::third);
+        t1.start();
+        t2.start();
+        t3.start();
     }
 }
-
 ```
 
 
