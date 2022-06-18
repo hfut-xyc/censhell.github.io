@@ -19,23 +19,24 @@
 - [序列化](./basic/3-serialize.md)
 
 ## Java Concurrency
-### 基础篇
+### 多线程基础
 - [线程的创建](./concurrent/1-thread-create.md)
 - [线程的属性](./concurrent/1-thread-property.md)
 - [线程的中断](./concurrent/1-thread-interrupt.md)
 
-### 底层原理篇
+### 底层原理
+- [Java 内存模型](./concurrent/2-jmm.md)
 - [volatile](./concurrent/2-volatile.md)
 - [synchronized](./concurrent/2-synchronized.md)
 
-### JUC工具篇
+### JUC 并发工具
 - [线程池](./concurrent/3-ThreadPool.md)
+- [Future & CompletableFuture](./concurrent/3-future.md)
 - [ThreadLocal](./concurrent/3-ThreadLocal.md)
 - [Atomic 原子类](./concurrent/3-atomic.md)
+- [并发容器](./concurrent/3-container.md)
 - [AQS](./concurrent/3-aqs.md)
 - [Lock](./concurrent/3-lock.md)
-- [并发容器](./concurrent/3-container.md)
-- [Future & CompletableFuture](./concurrent/3-future.md)
 - [ForkJoin]()
 
 ## Spring

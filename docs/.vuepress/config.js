@@ -49,7 +49,7 @@ module.exports = {
         text: '数据库', link: '/db'
       },
       {
-        text: '开发工具', link: '/tool'
+        text: '消息队列', link: '/mq'
       },
     ]
   })

@@ -1,14 +1,20 @@
+---
+prev: /java/concurrent/3-threadpool.md
+next: /java/concurrent/3-atomic.md
+---
+
 # Future & CompletableFuture
 
-## Future
-Callable 与 Runnable 相比，主要有以下2个优势：
-- Callable 有返回值
-- Callable 能够抛出异常
+## Callable
+当线程池执行异步任务时，可以提交一个 Runnable 接口的实现，但这种方法有两个缺点：
+- run 方法没有返回值
+- run 方法不能抛出 checked Exception
 
+为了解决这个问题，可以选择使用 `Callable<T>` 接口
 ```java
 @FunctionalInterface
 public interface Runnable {
-    public abstract void run();
+    void run();
 }
 
 @FunctionalInterface
@@ -17,6 +23,14 @@ public interface Callable<V> {
 }
 ```
 
+## Future
+当主线程的线程池提交一个 Callable 任务时，会返回一个 Future 对象，它表示子线程未来的执行结果。
+
+在主线程调用 `Future.get()` 时，如果异步任务已经完成，就直接获得结果；如果还未完成，主线程就会阻塞，直到任务完成后才返回结果。
+
+如果异步任务比较耗时，可以调用 `Future.get(long timeout, TimeUnit unit)` 限时等待结果，防止主线程一直阻塞。
+
+Future 接口的所有方法如下所示
 ```java
 public interface Future<V> {
     boolean cancel(boolean mayInterruptIfRunning);
@@ -27,6 +41,27 @@ public interface Future<V> {
 }
 ```
 
+下面演示如何用线程池创建 Future，并用 isDone 判断任务是否完成
+
+::: details Demo1 Future的创建
+```java{9}
+public static void test1_get() throws ExecutionException, InterruptedException {
+    ExecutorService executor = Executors.newFixedThreadPool(4);
+    Future<String> future = executor.submit(() -> {
+        Thread.sleep(2500);
+        return Thread.currentThread().getName();
+    });
+
+    System.out.println(future.isDone());    // false
+    String result = future.get();           
+    System.out.println(future.isDone());    // true
+    System.out.println(result);
+    executor.shutdown();
+}
+```
+:::
+
+## FutureTask
 ``` java
 public interface RunnableFuture<V> extends Runnable, Future<V> {
     void run();
@@ -35,137 +70,56 @@ public interface RunnableFuture<V> extends Runnable, Future<V> {
 
 ## CompletableFuture
 
-### 创建 CompletableFuture
-
 ```java
 public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
     
-	public static <U> CompletableFuture<U> supplyAsync(Supplier<U> supplier) {
-        return asyncSupplyStage(asyncPool, supplier);
-    }
-
-    public static <U> CompletableFuture<U> supplyAsync(Supplier<U> supplier, Executor executor) {
-        return asyncSupplyStage(screenExecutor(executor), supplier);
-    }
-
-    public static CompletableFuture<Void> runAsync(Runnable runnable) {
-        return asyncRunStage(asyncPool, runnable);
-    }
-
-    public static CompletableFuture<Void> runAsync(Runnable runnable, Executor executor) {
-        return asyncRunStage(screenExecutor(executor), runnable);
-    }
 }
 ```
 
-### thenApply
-
+### 创建
+runAsync, supplyAsync
 ```java
-public <U> CompletableFuture<U> thenApply(Function<? super T,? extends U> fn) {
-    return uniApplyStage(null, fn);
-}
-
-public <U> CompletableFuture<U> thenApplyAsync(Function<? super T,? extends U> fn) {
-    return uniApplyStage(asyncPool, fn);
-}
-
-public <U> CompletableFuture<U> thenApplyAsync(Function<? super T,? extends U> fn, Executor executor) {
-    return uniApplyStage(screenExecutor(executor), fn);
-}
+public static CompletableFuture<Void> runAsync(Runnable runnable);
+public static <U> CompletableFuture<U> supplyAsync(Supplier<U> supplier);
 ```
 
+### 回调函数
+thenAccept, thenApply, thenRun, exceptionally
 
-
-### thenAccept
-
+whenComplete, handle
 ```java
-public CompletableFuture<Void> thenAccept(Consumer<? super T> action) {
-    return uniAcceptStage(null, action);
-}
+public CompletableFuture<Void> thenRun(Runnable action);
+public CompletableFuture<Void> thenAccept(Consumer<? super T> action);
+public <U> CompletableFuture<U> thenApply(Function<? super T,? extends U> fn);
+public CompletableFuture<T> exceptionally(Function<Throwable, ? extends T> fn);
 
-public CompletableFuture<Void> thenAcceptAsync(Consumer<? super T> action) {
-    return uniAcceptStage(asyncPool, action);
-}
-
-public CompletableFuture<Void> thenAcceptAsync(Consumer<? super T> action, Executor executor) {
-    return uniAcceptStage(screenExecutor(executor), action);
-}
+public CompletableFuture<T> whenComplete(BiConsumer<? super T,? super Throwable> action);
+public <U> CompletableFuture<U> handle(BiFunction<? super T, Throwable, ? extends U> fn);
 ```
 
-
-
-### thenRun
-
 ```java
-public CompletableFuture<Void> thenRun(Runnable action) {
-    return uniRunStage(null, action);
-}
 
-public CompletableFuture<Void> thenRunAsync(Runnable action) {
-    return uniRunStage(asyncPool, action);
-}
-
-public CompletableFuture<Void> thenRunAsync(Runnable action, Executor executor) {
-    return uniRunStage(screenExecutor(executor), action);
-}
 ```
 
-### exceptionally
-
+### thenCompose, thenCombine
 ```java
-public CompletableFuture<T> exceptionally(Function<Throwable, ? extends T> fn) {
-    return uniExceptionallyStage(fn);
-}
-```
+public <U> CompletableFuture<U> thenCompose(
+    Function<? super T, ? extends CompletionStage<U>> fn);
 
-### thenCompose
-
-```java
-public <U> CompletableFuture<U> thenCompose(Function<? super T, ? extends CompletionStage<U>> fn) {
-    return uniComposeStage(null, fn);
-}
-
-public <U> CompletableFuture<U> thenComposeAsync(Function<? super T, ? extends CompletionStage<U>> fn) {
-    return uniComposeStage(asyncPool, fn);
-}
-
-public <U> CompletableFuture<U> thenComposeAsync(
-    Function<? super T, ? extends CompletionStage<U>> fn, Executor executor) {
-    return uniComposeStage(screenExecutor(executor), fn);
-}
-```
-
-### thenCombine
-
-```java
 public <U,V> CompletableFuture<V> thenCombine(
-    CompletionStage<? extends U> other,
-    BiFunction<? super T,? super U,? extends V> fn) {
-    return biApplyStage(null, other, fn);
-}
-
-public <U,V> CompletableFuture<V> thenCombineAsync(
-    CompletionStage<? extends U> other,
-    BiFunction<? super T,? super U,? extends V> fn) {
-    return biApplyStage(asyncPool, other, fn);
-}
-
-public <U,V> CompletableFuture<V> thenCombineAsync(
-    CompletionStage<? extends U> other,
-    BiFunction<? super T,? super U,? extends V> fn, Executor executor) {
-    return biApplyStage(screenExecutor(executor), other, fn);
-}
+    CompletionStage<? extends U> other, 
+    BiFunction<? super T,? super U,? extends V> fn);
 ```
-
-### allOf anyOf
 
 ```java
-public static CompletableFuture<Void> allOf(CompletableFuture<?>... cfs) {
-    return andTree(cfs, 0, cfs.length - 1);
-}
 
-public static CompletableFuture<Object> anyOf(CompletableFuture<?>... cfs) {
-    return orTree(cfs, 0, cfs.length - 1);
-}
+```
+### allOf anyOf
+```java
+public static CompletableFuture<Void> allOf(CompletableFuture<?>... cfs);
+public static CompletableFuture<Object> anyOf(CompletableFuture<?>... cfs);
 ```
 
+## 参考文献
+- [《Java 8 实战》第11章-CompletableFuture：组合式异步编程](https://book.douban.com/subject/26772632/)
+- 

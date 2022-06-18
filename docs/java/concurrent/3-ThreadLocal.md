@@ -24,6 +24,8 @@ public class Thread implements Runnable {
 - ThreadLocalMap 中的每个 Entry 都包含一个对 key 的弱引用，对 value 的强引用
 - **弱引用的特点**：如果对象只被弱引用关联，即没有任何强引用关联，这个对象就可以被回收
 - **OOM错误**：如果线程一直不结束，key 可能会变成 null，value指向的对象却无法回收，随着 ThreadLocal 的增多，可能会出现内存泄露
+
+
 ```java
 public class ThreadLocal<T> {
 
@@ -97,6 +99,7 @@ public class ThreadLocal<T> {
 
 ## 应用场景
 
+### MyBatis
 Mybatis 中保持事务连接的一致
 ```java
 public class SqlSessionManager implements SqlSessionFactory, SqlSession {
@@ -117,5 +120,5 @@ public class SqlSessionManager implements SqlSessionFactory, SqlSession {
 
 ```
 
-## Reference
+## 参考文献
 - [慕课网免费课-ThreadLocal](https://www.imooc.com/learn/1217)

@@ -13,3 +13,10 @@ synchronized 关键字即同步，用于修饰方法和代码块，
 ## 原理
 - 修饰方法时，编译后会加上 ACC_SYNCHRONIZED
 - 修饰代码块时，编译后会在代码块前后分别加上 monitorenter 和 monitorexit
+
+## 锁优化机制
+
+### 锁消除
+
+
+### 锁粗化

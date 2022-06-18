@@ -1,12 +1,9 @@
 # Atomic 原子类
 
+## 介绍
 
-## 使用
-
-## Compare And Swap
-
-CAS的全称是：比较并交换（Compare And Swap）在CAS中，有这样三个值：
-
+### CompareAndSwap
+比较并交换（Compare And Swap, CAS）有这样三个值：
 - V：要更新的变量(var)
 - E：预期值(expected)
 - N：新值(new)
@@ -20,8 +17,7 @@ CAS的全称是：比较并交换（Compare And Swap）在CAS中，有这样三�
 
 - 不会的。因为CAS是一种原子操作，是一条CPU的原子指令 CMPXCHG，从CPU层面保证它的原子性
 
-
-## 原理
+## AtomicInteger
 
 ``` java
 public class AtomicInteger {
@@ -44,9 +40,7 @@ public class AtomicInteger {
 }
 
 ```
-
-因为CAS是一种原子操作，是一条CPU的原子指令 CMPXCHG，从CPU层面保证它的原子性
-
+CAS是一种原子操作，是一条CPU的原子指令 CMPXCHG，从CPU层面保证它的原子性
 ``` java
 public class Unsafe {
 
@@ -70,6 +64,15 @@ public class Unsafe {
 }
 ```
 
+## AtomicArray
+
+## AtomicReference
+
+## AtomicFieldUpdater
+
+## LongAdder
+
+
 ## CAS的三大问题
 
 ### ABA问题
@@ -87,4 +90,4 @@ public class Unsafe {
 - 使用锁。锁内的临界区代码可以保证只有当前线程能操作
 
 
-## Reference
+## 参考文献

@@ -1,6 +1,6 @@
 # Spring AOP
 
-## 介绍 
+## 介绍
 面向切面编程（Aspect-Oriented Programming, AOP）本质上就是[动态代理](./../../design/structural/proxy.md)，但是在它的基础上做了一些改进
 
 

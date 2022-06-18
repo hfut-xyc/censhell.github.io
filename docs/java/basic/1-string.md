@@ -35,7 +35,7 @@ System.out.println(s4 == s6);   // false
 
 System.out.println(s5 == s6);   // false
 ```
-
+如果在前面加上 final
 ```java
 final String s1 = "a";
 final String s2 = "b"; 	

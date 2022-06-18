@@ -2,13 +2,14 @@
 
 Abstract Queued Synchronizer
 
-
-
 ## 例题实战
-
+巧妙使用 AQS 通信工具类可以实现并发的流程控制，下面选取若干 LeetCode 较为经典的题作为案例
 ### 按序打印
-[](https://leetcode.cn/problems/print-in-order/)
+> [https://leetcode.cn/problems/print-in-order/](https://leetcode.cn/problems/print-in-order/)
 
+第一种解法可以使用 Semaphore
+
+::: details Solution 1
 ``` java
 import java.util.concurrent.Semaphore;
 
@@ -51,65 +52,103 @@ public class PrintInOrder {
     }
 }
 ```
+:::
 
-
+第二种解法可以使用 CountDownLatch
+::: details Solution 2
 ```java
-class Foo {
-    
-    CountDownLatch latch1 = new CountDownLatch(1);
-    CountDownLatch latch2 = new CountDownLatch(1);
+import java.util.concurrent.CountDownLatch;
 
-    public void first(Runnable printFirst) throws InterruptedException {
-        printFirst.run();
-        latch1.countDown();
+public class PrintInOrder2 {
+
+    private static CountDownLatch second = new CountDownLatch(1);
+    private static CountDownLatch third = new CountDownLatch(1);
+
+    public static void first()  {
+        System.out.println("first");
+        second.countDown();
     }
 
-    public void second(Runnable printSecond) throws InterruptedException {
-        latch1.await();
-        printSecond.run();
-        latch2.countDown();
+    public static void second()  {
+        try {
+            second.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("second");
+        third.countDown();
     }
 
-    public void third(Runnable printThird) throws InterruptedException {    
-        latch2.await();
-        printThird.run();
+    public static void third()  {
+        try {
+            third.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("third");
+    }
+
+    public static void main(String[] args) {
+        Thread t1 = new Thread(PrintInOrder2::first);
+        Thread t2 = new Thread(PrintInOrder2::second);
+        Thread t3 = new Thread(PrintInOrder2::third);
+        t1.start();
+        t2.start();
+        t3.start();
     }
 }
 
 ```
+:::
 
 ### 交替打印
-[](https://leetcode.cn/problems/print-foobar-alternately/)
+> [https://leetcode.cn/problems/print-foobar-alternately/](https://leetcode.cn/problems/print-foobar-alternately/)
 
+::: details Solution 
 ```java
-class FooBar {
+package aqs;
 
-    private int n;
-    Semaphore foo = new Semaphore(1);
-    Semaphore bar = new Semaphore(0);
+import java.util.concurrent.Semaphore;
 
-    public FooBar(int n) {
-        this.n = n;
-    }
+public class PrintFooBar {
 
-    public void foo(Runnable printFoo) throws InterruptedException {  
+    private static int n = 5;
+    private static Semaphore foo = new Semaphore(1);
+    private static Semaphore bar = new Semaphore(0);
+
+    public static void foo() {
         for (int i = 1; i <= n; i++) {
-            foo.acquire();
-            printFoo.run();
+            try {
+                foo.acquire();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("foo");
             bar.release();
         }
     }
 
-    public void bar(Runnable printBar) throws InterruptedException {     
+    public static void bar() {
         for (int i = 1; i <= n; i++) {
-            bar.acquire();
-            printBar.run();
+            try {
+                bar.acquire();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("bar");
             foo.release();
         }
     }
+
+    public static void main(String[] args) {
+        Thread t1 = new Thread(PrintFooBar::foo);
+        Thread t2 = new Thread(PrintFooBar::bar);
+        t1.start();
+        t2.start();
+    }
 }
-
-
 ```
+:::
+
 ### 打印奇偶数
-[](https://leetcode.cn/problems/print-zero-even-odd/)
+> [https://leetcode.cn/problems/print-zero-even-odd/](https://leetcode.cn/problems/print-zero-even-odd/)

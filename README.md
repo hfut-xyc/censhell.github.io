@@ -6,7 +6,7 @@
 </div>
 
 - 本仓库是 hfut-xyc 的个人博客，主要用作学习笔记
-- 本仓库有 2 个分支：一个是 `master` 分支，记录着原始的 markdown 文件；另一个是 html 分支，存放着静态 html 文件
+- 本仓库有 2 个分支：一个是 `master` 分支，记录着原始的 markdown 文件；另一个是 `html` 分支，存放着静态 html 文件
 - 前端页面使用的是 [Vuepress2](https://v2.vuepress.vuejs.org/)，图床使用的是 [sm.ms](https://sm.ms/)
 
 ## Tip
