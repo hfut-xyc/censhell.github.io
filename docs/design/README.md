@@ -1,8 +1,7 @@
 # Design Patterns
 
 ## Creational
-- [工厂模式](creational/factory.md)
-- [工厂方法模式](creational/factory-method.md)
+- [简单工厂模式, 抽象工厂模式，工厂方法模式](creational/factory.md)
 - [单例模式](creational/singleton.md)
 - [原型模式](creational/prototype.md)
 - [建造者模式](creational/builder.md)
