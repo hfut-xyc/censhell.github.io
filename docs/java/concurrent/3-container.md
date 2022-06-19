@@ -1,8 +1,7 @@
 # 并发容器
+本文主要介绍几种常用的并发容器：ConcurrentHashMap, 
 
 ## ConcurrentHashMap
-
-### 介绍
 Java 8 之前，ConcurrentHashMap采用`Segment + HashEntry`来实现底层结构：
 
 ![]()

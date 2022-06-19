@@ -13,7 +13,7 @@ next: /java/concurrent/3-future.md
 
 ### 线程池的体系
 
-线程池的继承体系如下图所示，我们所使用的线程池一般是 ThreadPoolExecutor
+线程池的继承体系如下图所示，我们所用的线程池一般是 ThreadPoolExecutor
 <div align="center"><img src="https://s2.loli.net/2022/06/14/twYJGhB81XeuqUk.png"/></div>
 
 父类接口中的一些重要方法如下，用法后面会详细介绍
@@ -28,10 +28,6 @@ public interface ExecutorService extends Executor {
     boolean isShutdown();
     boolean isTerminated();
     boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException;
-    
-    Future<?> submit(Runnable task);
-    <T> Future<T> submit(Runnable task, T result);
-    <T> Future<T> submit(Callable<T> task);
 }
 ```
 

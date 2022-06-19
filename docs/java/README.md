@@ -31,9 +31,10 @@
 
 ### JUC 并发工具
 - [线程池](./concurrent/3-threadpool.md)
-- [Future & CompletableFuture](./concurrent/3-future.md)
-- [ThreadLocal](./concurrent/3-ThreadLocal.md)
+- [Future 异步任务](./concurrent/3-future.md)
+- [CompletableFuture 异步回调](./concurrent/3-future2.md)
 - [Atomic 原子类](./concurrent/3-atomic.md)
+- [ThreadLocal](./concurrent/3-ThreadLocal.md)
 - [并发容器](./concurrent/3-container.md)
 - [AQS](./concurrent/3-aqs.md)
 - [Lock](./concurrent/3-lock.md)

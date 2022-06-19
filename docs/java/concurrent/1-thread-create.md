@@ -32,6 +32,7 @@ public class ThreadCreation {
 
     public static void main(String[] args) {
         Thread t1 = new MyThread();
+        t1.start();
     }
 }
 ```
@@ -46,6 +47,7 @@ public class ThreadCreation {
         Thread t2 = new Thread(() -> {
             System.out.println(Thread.currentThread().getName());
         });
+        t2.start();
     }
 }
 ```
