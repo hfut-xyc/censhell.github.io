@@ -1,8 +1,6 @@
 # Atomic 原子类
 
-## 介绍
-
-### CompareAndSwap
+## CompareAndSwap
 比较并交换（Compare And Swap, CAS）有这样三个值：
 - V：要更新的变量(var)
 - E：预期值(expected)

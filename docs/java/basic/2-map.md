@@ -1,8 +1,6 @@
 # Map
 本文主要介绍集合框架中的 HashMap, TreeMap, HashTable
 ## HashMap
-### 介绍
-
 HashMap 是 `java.util.collection` 包下一种常用的数据结构，用于存放键值对，采用拉链法解决 Hash 冲突，是线程不安全的
 
 Java8 之前，HashMap 的实现基于 `数组+链表`，链表采用 `头插法`
@@ -298,9 +296,7 @@ final Node<K,V>[] resize() {
 ```
 ## TreeMap
 
-### 介绍
 TreeMap是完全基于红黑树构建的，因此它是有序的
-
 
 ### 初始化
 ``` java

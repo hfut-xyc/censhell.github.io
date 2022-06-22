@@ -2,8 +2,6 @@
 本文主要介绍 ArrayList, LinkedList, Vector
 ## ArrayList
 
-### 介绍
-
 ArrayList 是
 
 ### 常量与变量

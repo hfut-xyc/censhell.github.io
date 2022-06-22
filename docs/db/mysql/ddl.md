@@ -1,6 +1,4 @@
 # Data Definition Language
-
-## 介绍
 SQL 语言按照功能可以划分为四类：
 - 数据定义语言 DDL：`create database/table/index/view`
 - 数据查询语言 DQL：`select`

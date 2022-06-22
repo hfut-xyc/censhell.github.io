@@ -84,7 +84,7 @@ public static void test2() {
     });
     try {
         Thread.sleep(1500);
-        future.get();
+        future.get();   // 子线程并非一产生异常就抛出，而是调用 get 时才会抛出
     } catch (InterruptedException | ExecutionException e) {
         e.printStackTrace();
     }
@@ -174,7 +174,7 @@ public static void test5() throws ExecutionException, InterruptedException {
 ```
 
 ## submit or execute
-注意到在[上一篇文章](./3-threadpool.md)中，线程池提交任务都是用 execute，但是在本文中换成了 submit
+在[上一篇文章](./3-threadpool.md)中，线程池提交任务都是用 execute，但是在本文中换成了 submit
 
 它既能提交 Runnable，也能提交 Callable，且返回均为 Future 对象，但本质上还是要调用 execute
 

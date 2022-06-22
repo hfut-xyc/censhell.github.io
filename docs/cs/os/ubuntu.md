@@ -1,6 +1,5 @@
 # Ubuntu20.04 常用配置和软件安装 
 
-## 介绍
 本文以 **Ubuntu 20.04** 系统为例，简要介绍一下刚装好的 Linux 应该如何配置
 
 ## 更换软件源
@@ -75,7 +74,7 @@ sudo chsh -s /bin/zsh
 
 ### Java
 - 如果是虚拟机或者云服务器，可以先在 Windows 下载 [JDK1.8压缩包](https://pan.baidu.com/s/1zjriuEPC4pXF92lm1Ql0TQ) (提取码：jdk8)
-- 然后将压缩包通过 [XFTP](https://www.xshell.com/zh/free-for-home-school/) 传到 /home/username 目录下
+- 然后将压缩包通过 [XFTP](https://www.xshell.com/zh/free-for-home-school/) 传到 /home/USERNAME 目录下
 - 将压缩包解压到 /usr/local 目录下
 ```bash
 sudo mv ~/jdk-8u241-linux-x64.tar.gz /usr/local

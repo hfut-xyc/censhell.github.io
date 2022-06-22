@@ -16,21 +16,6 @@ next: /java/concurrent/3-future.md
 线程池的继承体系如下图所示，我们所用的线程池一般是 ThreadPoolExecutor
 <div align="center"><img src="https://s2.loli.net/2022/06/14/twYJGhB81XeuqUk.png"/></div>
 
-父类接口中的一些重要方法如下，用法后面会详细介绍
-```java
-public interface Executor {
-    void execute(Runnable command);
-}
-
-public interface ExecutorService extends Executor {
-    void shutdown();
-    List<Runnable> shutdownNow();
-    boolean isShutdown();
-    boolean isTerminated();
-    boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException;
-}
-```
-
 ## 线程池的创建
 ### 使用 ThreadPoolExecutor 手动创建
 线程池的构造函数如下所示
@@ -119,75 +104,118 @@ public class Executors {
 :::
 
 ## 线程池的任务执行
-线程池的提交任务的逻辑如下图所示
 
-![]()
-
+线程池创建子线程的核心方法是 execute，它的声明位于 `Executor` 接口
 ```java
+public interface Executor {
+    void execute(Runnable command);
+}
+```
+
+execute 方法的实现位于 `ThreadPoolExecutor` 类
+```java{15,18}
 public class ThreadPoolExecutor extends AbstractExecutorService {
     public void execute(Runnable command) {
         if (command == null)
             throw new NullPointerException();
         int c = ctl.get();
-        // 当前线程数 < 核心线程数，调用 addWorker 创建核心线程执行任务
+        // 1.如果当前线程数 < 核心线程数, 调用 addWorker 创建核心线程执行任务
         if (workerCountOf(c) < corePoolSize) {
             if (addWorker(command, true))
                 return;
             c = ctl.get();
         }
-        // 
+        // 2.如果当前线程数 >= 核心线程数, 将任务添加到阻塞队列
         if (isRunning(c) && workQueue.offer(command)) {
             int recheck = ctl.get();
-            // 线程池已经关闭，则删除这个任务并拒绝
+            // 2.1 如果线程池已关闭，则将该任务从队列中删除并拒绝
             if (!isRunning(recheck) && remove(command))
                 reject(command);
-            // 
+            // 2.2 如果线程池未关闭，并且线程数为 0，创建非核心线程
             else if (workerCountOf(recheck) == 0)
                 addWorker(null, false);
         }
+        // 3.如果阻塞队列已满，尝试创建非核心线程，如果失败则拒绝任务
         else if (!addWorker(command, false))
             reject(command);
     }
 }
-```
 
-创建线程池并执行任务的演示程序如下
-```java
-
+private boolean addWorker(Runnable firstTask, boolean core) {
+    // ...
+}
 ```
+::: tip 
+- **2.1 处解释**：在多线程的环境下，可能会出现任务刚入队，线程池不处于 RUNNING 的情况，此时该任务永远无法执行
+- **2.2 处解释**：这种情况对应是 `CachedThreadPool` 的情况，它只会创建非核心线程
+:::
+通过观察 execute 的源码，可知线程池的提交任务的逻辑如下图所示
+<div align="center"><img src="https://s2.loli.net/2022/06/22/mHWVMk6UNbQsx58.png" >
+</div>
 
 ## 线程池的生命周期
+
+线程池的生命周期有 5 种状态，每个状态的含义如下表所示
+| State      | Description                                                      |
+| ---------- | ---------------------------------------------------------------- |
+| RUNNING    | 能接受新提交的任务，也能处理阻塞队列的任务                       |
+| SHUTDOWN   | 不再接受新提交的任务，执行中和等待中的任务会继续执行             |
+| STOP       | 不再接受新提交的任务，执行中的任务全部中断，等待中的任务全部取消 |
+| TIDYING    | 所有任务都终止，工作线程数为 0                                   |
+| TERMINATED | 调用 `terminate()` 后进入该状态                                  |
+
 线程池的生命周期如下图所示
 ![]()
 
-各个状态的含义如下表所示
-| State      | Description                                                          |
-| ---------- | -------------------------------------------------------------------- |
-| RUNNING    | 能接受新提交的任务，也能处理阻塞队列的任务                           |
-| SHUTDOWN   | 不接受新提交的任务，但能处理阻塞队列的任务                           |
-| STOP       | 不接受新提交的任务，也不能处理阻塞队列的任务，正在处理的任务也被中断 |
-| TIDYING    | 所有任务都终止，工作线程数为 0                                       |
-| TERMINATED | 调用 `terminate()` 后进入该状态                                      |
+与线程池状态相关的常用函数如下所示
+```java
+public interface ExecutorService extends Executor {
+    void shutdown();
+    List<Runnable> shutdownNow();
+    boolean isShutdown();
+    boolean isTerminated();
+    boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException;
+}
+```
+| Method           | Return  | Description                                                                    |
+| ---------------- | ------- | ------------------------------------------------------------------------------ |
+| shutdown         | void    | 让线程池进入 SHUTDOWN 状态，执行中和等待中的任务会继续执行                     |
+| shutdownNow      | List    | 让线程池进入 STOP 状态，执行中的任务全部中断，等待中的任务全部取消并返回为列表 |
+| isShutdown       | boolean | 判断线程池是否关闭                                                             |
+| isTerminated     | boolean | 判断线程池是否终止                                                             |
+| awaitTermination | boolean | 在线程池关闭后，阻塞至所有任务完成或者超时                                     |
 
-
-与线程池状态相关的常用函数如下
-| Method           | Return  | Description                                  |
-| ---------------- | ------- | -------------------------------------------- |
-| shutdown         | void    |                                              |
-| shutdownNow      | List    |                                              |
-| awaitTermination | boolean | 在线程池关闭后，阻塞至超时或者所有任务完成 |
-| isShutdown       | boolean | 判断线程池是否关闭                           |
-| isTerminated     | boolean | 判断线程池是否终止                           |
-
-
-### 演示程序
 关闭线程池的演示代码如下
+<CodeGroup>
+<CodeGroupItem title="YARN" active>
+
 ```java
 
 ```
+</CodeGroupItem>
+<CodeGroupItem title="NPM" >
+
+```java
+
+```
+</CodeGroupItem>
+<CodeGroupItem title="NPM" >
+
+```java
+
+```
+</CodeGroupItem>
+<CodeGroupItem title="NPM" >
+
+```java
+
+```
+</CodeGroupItem>
+</CodeGroup>
 
 
 ## 线程池的拒绝策略
+当线程池的线程数达到最大值，且阻塞队列已满时，再提交任务就会被拒绝，4 种拒绝策略如下表所示
 
 | Parameter           | Description                                                 |
 | :------------------ | :---------------------------------------------------------- |
@@ -199,5 +227,5 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 
 ## 参考文献
 - [《深入浅出 Java 多线程》第12章-线程池原理](http://concurrent.redspider.group/article/03/12.html)
-- [《Java 并发编程的艺术》](https://book.douban.com/subject/26591326/)
-- [Java线程池实现原理及其在美团业务中的实践](https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html)
+- [Javadoop-深度解读 java 线程池设计思想及源码实现](https://javadoop.com/post/java-thread-pool)
+- [Java 线程池实现原理及其在美团业务中的实践](https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html)

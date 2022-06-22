@@ -1,4 +1,4 @@
-## 介绍
+## Introduction
 <div align="center">
     <a href="https://hfut-xyc.github.io" target="blank"> 
       <img src="https://badgen.net/badge/Github/HFUT-XYC/blue?icon=github&">

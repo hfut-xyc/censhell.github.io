@@ -40,18 +40,19 @@
 - sed：
 
 ### 硬件管理
-- lsblk：查看磁盘分区
 - df：查看各磁盘分区使用情况
 - du：查看文件夹所占磁盘空间大小
+- lsblk：查看磁盘分区
+- fdisk：对磁盘进行分区
+- mount：将磁盘分区挂载到指定目录下
+- unmount：卸载磁盘分区
 - free：查看内存使用情况
 - lscpu：查看CPU信息
 - lsusb：查看USB接口信息
 - uname：查看系统信息，包括操作系统、主机名、内核等
 - nvidia-smi：查看显卡信息和显存使用情况
 - nvidia-settings
-- fdisk
-- mount
-- unmount
+
 ### 关机/重启
 - shutdown
 - reboot
@@ -219,6 +220,9 @@ ls -l | grep '^d' | wc -l
 ```bash
 ## 仅查看所有分区大小
 lsblk
+
+## 查看磁盘分区详情
+sudo fdisk -l
 
 ## 查看所有分区大小和使用情况
 df -h
