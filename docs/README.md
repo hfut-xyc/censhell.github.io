@@ -4,6 +4,7 @@
 - [Algorithm](./cs/README.md#algorithm)
 - [Computer Network](./cs/README.md#computer-network)
 - [Operating System](./cs/README.md#operating-system)
+- [Design Patterns](./cs/README.md#design-patterns)
 
 ## :coffee:Java
 - [Java Basis](./java/README.md/#java-basis)
@@ -11,11 +12,6 @@
 - [Spring](./java/README.md/#spring)
 - [Netty](./java/README.md/#netty)
 - [JVM](./java/README.md/#jvm)
-
-## :memo:Design Patterns
-- [Creational Patterns](./design/README.md#creational)
-- [Structural Patterns](./design/README.md#structural)
-- [Behavioral Patterns](./design/README.md#behavioral)
 
 ## :cd:Database
 - [MySQL](./db/README.md/#mysql)

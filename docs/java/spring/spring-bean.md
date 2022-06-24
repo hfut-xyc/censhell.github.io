@@ -146,6 +146,8 @@ public class Author {}
 ```
 下面简要说一下 `@Autowired` 和 `@Resource` 的区别
 
+## Bean 的循环依赖问题
+
 
 ## Bean 的生命周期
 
