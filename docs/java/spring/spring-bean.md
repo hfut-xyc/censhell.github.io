@@ -10,7 +10,7 @@
 
 ## Bean 的声明
 
-Bean 的声明主要有三种方法，目前后两种的使用更普遍：
+Bean 的声明主要有三种方式：
 
 - 基于 XML 文件
 - 基于注解
@@ -88,9 +88,9 @@ public class MyConfig {
 }
 ```
 
-## Bean 的注入方式
+## Bean 的注入
 
-Bean 实现依赖注入的方式主要有三种：
+Bean 实现依赖注入主要有三种方式：
 
 - constructor 注入
 - setter 注入
@@ -120,7 +120,7 @@ public class Author {}
 
 ### setter 注入
 
-使用 `@Autowired` 修饰 setter 方法即可，但是和上面的构造器注入有两点不同：
+使用`@Autowired` 修饰 setter 方法即可，但是和上面的构造器注入有两点不同：
 
 - 此时注解不能去掉
 - 此时需要注入的成员变量不可以用 final 修饰
@@ -159,7 +159,7 @@ public class Book {
 public class Author {}
 ```
 
-## @Autowired 和 @Resource 的区别
+### @Autowired 和 @Resource 的区别
 
 ```java
 @Target({ElementType.CONSTRUCTOR, ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD, ElementType.ANNOTATION_TYPE})
@@ -193,13 +193,11 @@ Spring Bean 的作用域有 5 种，如下表所示
 ### 单例模式 Bean 的优缺点
 
 Spring Bean 默认使用单例模式，有以下优点：
-
 - 能减少创建新实例的消耗和内存占用
 - 能减少 JVM 垃圾回收的消耗
 - 能通过缓存快速获取 Bean
 
 缺点也很明显：
-
 - 如果 Bean 是有状态的，则可能会导致线程不安全
 
 ### 单例模式 Bean 如何保证线程安全

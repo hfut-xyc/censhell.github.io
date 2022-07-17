@@ -37,22 +37,22 @@ module.exports = {
         text: 'Index', link: '/'
       },
       {
-        text: '计算机基础', link: '/cs'
+        text: 'CS', link: '/cs'
       },
       {
         text: 'Java', link: '/java'
       },
       {
-        text: '设计模式', link: '/design'
+        text: 'Frontend', link: '/frontend'
       },
       {
-        text: '数据库', link: '/db'
+        text: 'Database', link: '/db'
       },
       {
-        text: '消息队列', link: '/mq'
+        text: 'MQ', link: '/mq'
       },
       {
-        text: '开发工具', link: '/tool'
+        text: 'DevTool', link: '/tool'
       },
     ]
   })
