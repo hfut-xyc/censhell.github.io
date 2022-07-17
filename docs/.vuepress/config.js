@@ -51,6 +51,9 @@ module.exports = {
       {
         text: '消息队列', link: '/mq'
       },
+      {
+        text: '开发工具', link: '/tool'
+      },
     ]
   })
 }

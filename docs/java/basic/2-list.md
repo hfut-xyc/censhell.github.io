@@ -1,14 +1,17 @@
 # List
+
 本文主要介绍 ArrayList, LinkedList, Vector
+
 ## ArrayList
 
 ArrayList 是
 
 ### 常量与变量
+
 ```java
 public class ArrayList<E> extends AbstractList<E>
     implements List<E>, RandomAccess, Cloneable, java.io.Serializable {
-        
+      
     // 默认初始容量大小
     private static final int DEFAULT_CAPACITY = 10;
 
@@ -57,7 +60,7 @@ public ArrayList(Collection<? extends E> c) {
 }
 ```
 
-``` java
+```java
 
 // 将元素添加到表尾
 public boolean add(E e) {
@@ -103,47 +106,53 @@ private void grow(int minCapacity) {
     // 如果1.5倍还是不够，那干脆就把所需最小容量当作数组的新容量
     if (newCapacity - minCapacity < 0)
         newCapacity = minCapacity;
-    // 如果新容量超过了ArrayList所定义的最大容量，则比较minCapacity和MAX_ARRAY_SIZE，           
+    // 如果新容量超过了ArrayList所定义的最大容量，则比较minCapacity和MAX_ARRAY_SIZE，         
     if (newCapacity - MAX_ARRAY_SIZE > 0)
         newCapacity = hugeCapacity(minCapacity);
-        
+      
     // minCapacity is usually close to size, so this is a win:
     elementData = Arrays.copyOf(elementData, newCapacity);
 }
 ```
 
 ### 注意事项
+
 #### ArrayList.subList
-::: tip 
+
+::: tip
 subList 返回值不可强转成 ArrayList，否则会抛出 `ClassCastException`
+
 > 该方法返回值是 ArrayList 的内部类 SubList，是 ArrayList 的一个视图，对子列表的所有操作最终会反馈到原列表上
-:::
+> :::
 
 ::: tip
 在 subList 场景中，对原列表的增加或删除，均会导致子列表的遍历、增加、删除抛出 `ConcurrentModificationException`
 :::
 
-
 #### Arrays.asList
-::: tip 
+
+::: tip
 asList 将数组转换成集合后，不能使用 add/remove/clear 方法，否则会抛出 `UnsupportedOperationException`
 
 > 它返回的是 Arrays 的内部类 ArrayList，但是该类并没有实现集合的修改方法
-> 
+>
 > 它体现了[适配器模式]()，如果修改了原数组的值，列表值也会随之改变
+
 :::
 
 ```java
-String[] str = new String[] {"a", "b", "c"};     
+String[] str = new String[] {"a", "b", "c"};   
 List list = Arrays.asList(str); 
 str[0] = "c"   // list.get(0) == "c"
 ```
 
 #### toArray
-::: tip 
+
+::: tip
 使用集合转数组的方法，必须使用集合的 toArray(T[] array)，传入的是类型完全一致、长度为 0 的空数组
-> 无参的 `toArray()`，返回值只能是 `Object[]`，若强转其他类型数组将抛出 `ClassCastException` 
-:::
+
+> 无参的 `toArray()`，返回值只能是 `Object[]`，若强转其他类型数组将抛出 `ClassCastException`
+> :::
 
 ```java
 public Object[] toArray() {
@@ -159,6 +168,7 @@ public <T> T[] toArray(T[] a) {
     return a;
 }
 ```
+
 ## LinkedList
 
 ## Vector

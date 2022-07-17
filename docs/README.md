@@ -23,7 +23,8 @@
 - [RabbitMQ](./mq/README.md/#rabbitmq)
 
 ## :gear:DevTool
-- [Docker](./tool/docker.md)
-- [Git](./tool/git.md)
-- [Maven](./tool/maven.md)
-- [NPM](./tool/npm.md)
+
+- [NPM](./tool/README.md#npm)
+- [Maven](./tool/README.md#maven)
+- [Git](./tool/README.md#git)
+- [Docker](./tool/README.md#docker)
