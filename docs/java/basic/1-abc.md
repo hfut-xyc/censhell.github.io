@@ -1,11 +1,11 @@
 # Java 基本语法
 
-## 基本类型 & 包装类型
+## 数据类型
 
 Java 中有 8 种基本数据类型，分别对应 1 种 包装类型，如下表所示
 
 | 基本类型 | 对应包装类型 | 字节 | bit | 默认值  | 取值范围                                   |
-| -------- | ------------ | ---- | --- | ------- | ------------------------------------------ |
+| -------- | ------------ | ---- | --- | ------- | :------------------------------------------ |
 | byte     | Byte         | 1    | 8   | 0       | -128 ~ 127                                 |
 | short    | Short        | 2    | 16  | 0       | -32768 ~ 32767                             |
 | char     | Character    | 2    | 16  | 'u0000' | 0 ~ 65535                                  |
@@ -51,6 +51,30 @@ int i = Integer.parseInt(str);
 - Float, Double 没有缓存机制
 
 
+### BigDecimal
+
+double 类型的计算有时候会造成精度丢失，所以涉及金额的计算务必使用 `BigDecimal`
+```java
+public class BigDecimalDemo {
+    public static void main(String[] args) {
+        System.out.println(0.1 + 0.2);
+        System.out.println(1.0 - 0.8);
+        System.out.println(2.013 * 100);
+        System.out.println(123.3 / 100);
+
+        System.out.println(new BigDecimal(0.1).add(new BigDecimal(0.2)));
+    }
+}
+```
+
+```
+0.30000000000000004
+0.19999999999999996
+201.29999999999998
+1.2329999999999999
+0.3000000000000000166533453693773481063544750213623046875
+```
+
 ## Class Casting
 父类引用可以指向子类对象，在此前提下可以强转为子类引用
 ```java
@@ -84,8 +108,50 @@ Java 中的异常有两类：运行时异常 (RuntimeException)、受检异常
 | 受检异常   | 必须要手动 catch or throws，否则无法通过编译 | IOException, SQLException                      |
 
 ## 注解
+
+
+
 ```java
-public @interface 
+public enum ElementType {
+    /** Class, interface (including annotation type), or enum declaration */
+    TYPE,
+
+    /** Field declaration (includes enum constants) */
+    FIELD,
+
+    /** Method declaration */
+    METHOD,
+
+    /** Formal parameter declaration */
+    PARAMETER,
+
+    /** Constructor declaration */
+    CONSTRUCTOR,
+
+    /** Local variable declaration */
+    LOCAL_VARIABLE,
+
+    /** Annotation type declaration */
+    ANNOTATION_TYPE,
+
+    /** Package declaration */
+    PACKAGE,
+
+    /**
+     * Type parameter declaration
+     *
+     * @since 1.8
+     */
+    TYPE_PARAMETER,
+
+    /**
+     * Use of a type
+     *
+     * @since 1.8
+     */
+    TYPE_USE
+}
+
 ```
 
 ## 反射

@@ -10,7 +10,7 @@
 - [Java Basis](./java/README.md/#java-basis)
 - [Java Concurrency](./java/README.md/#java-concurrency)
 - [JVM](./java/README.md/#jvm)
-- [Spring](./java/README.md/#spring)
+- [Spring](./java/README.md/#spring-framework)
 - [Netty](./java/README.md/#netty)
 
 ## :pencil:Frontend

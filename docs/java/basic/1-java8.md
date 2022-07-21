@@ -1,9 +1,11 @@
-# Lambda 表达式
+# Java8 新特性
+
+## Lambda 表达式
 - 在lambda表达式中，只能引用值不会改变的变量
 - 在lambda表达式中，声明一个与外部变量同名的参数或局部变量是不合法的
 - 在lambda表达式中，使用 this 关键字时，是指创建这个lambda表达式的方法的this参数
 
-## 函数式接口
+### 函数式接口
 
 |     函数式接口      | 函数描述符        | 方法          | 应用举例               |
 | :-----------------: | ----------------- | :------------ | ---------------------- |
@@ -18,7 +20,7 @@
 |  BiConsumer<T, U>   | (T, U) ->void     |               |                        |
 |  BiPredicate<T, U>  | (T, U) -> boolean |               |                        |
 
-## 方法引用
+### 方法引用
 
 | 类别                     | Lambda表达式                                |
 | :----------------------- | :------------------------------------------ |
@@ -28,11 +30,28 @@
 | `Class::new`             | `(args) -> new Class(args)`                 |
 
 ``` java
-public class Test {
-    
-    
+
+```
+
+### 案例
+
+## Stream
+
+```java
+public interface Stream<T> extends BaseStream<T, Stream<T>> {
+
+    Stream<T> filter(Predicate<? super T> predicate);
+
+    <R> Stream<R> map(Function<? super T, ? extends R> mapper);
+        
 }
 ```
 
-## 案例
+## Java8 全新时间 API
 
+### LocalDate
+
+SimpleDateFormat 线程不安全
+
+
+## 参考文献

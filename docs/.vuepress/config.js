@@ -30,6 +30,7 @@ module.exports = {
     docsBranch: 'master',
     docsDir: 'docs',
     editLinkPattern: ':repo/edit/:branch/:path',
+    contributors: false,
     // siderbar and navbar
     sidebar: 'auto',
     navbar: [
