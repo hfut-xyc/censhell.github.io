@@ -1,10 +1,5 @@
-# AQS
-
-Abstract Queued Synchronizer
-
-## 例题实战
-巧妙使用 AQS 通信工具类可以实现并发的流程控制，下面选取若干 LeetCode 较为经典的题作为案例
-### 按序打印
+# 多线程
+## 按序打印
 > [https://leetcode.cn/problems/print-in-order/](https://leetcode.cn/problems/print-in-order/)
 
 第一种解法可以使用 Semaphore
@@ -54,7 +49,6 @@ public class PrintInOrder {
 ```
 :::
 
-第二种解法可以使用 CountDownLatch
 ::: details Solution 2
 ```java
 import java.util.concurrent.CountDownLatch;
@@ -101,13 +95,11 @@ public class PrintInOrder2 {
 ```
 :::
 
-### 交替打印
+## 交替打印
 > [https://leetcode.cn/problems/print-foobar-alternately/](https://leetcode.cn/problems/print-foobar-alternately/)
 
 ::: details Solution 
 ```java
-package aqs;
-
 import java.util.concurrent.Semaphore;
 
 public class PrintFooBar {
@@ -149,6 +141,3 @@ public class PrintFooBar {
 }
 ```
 :::
-
-### 打印奇偶数
-> [https://leetcode.cn/problems/print-zero-even-odd/](https://leetcode.cn/problems/print-zero-even-odd/)

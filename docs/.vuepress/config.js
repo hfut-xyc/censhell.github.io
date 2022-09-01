@@ -17,9 +17,7 @@ module.exports = {
     searchPlugin({
 
     }),
-    // googleAnalyticsPlugin({
 
-    // }),
   ],
   
   theme: defaultTheme({
@@ -38,19 +36,13 @@ module.exports = {
         text: 'Index', link: '/'
       },
       {
-        text: 'CS', link: '/cs'
+        text: 'Algorithm', link: '/algorithm'
       },
       {
         text: 'Java', link: '/java'
       },
       {
-        text: 'Frontend', link: '/frontend'
-      },
-      {
         text: 'Database', link: '/db'
-      },
-      {
-        text: 'MQ', link: '/mq'
       },
       {
         text: 'DevTool', link: '/tool'

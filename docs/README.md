@@ -1,34 +1,28 @@
 # Index
 
-## :computer:Computer Basis
-- [Algorithm](./cs/README.md#algorithm)
-- [Design Patterns](./cs/README.md#design-patterns)
-- [Computer Network](./cs/README.md#computer-network)
-- [Operating System](./cs/README.md#operating-system)
+## :computer:Algorithm
+- [动态规划](algorithm/dp.md)
+- [链表](algorithm/list.md)
 
 ## :coffee:Java
 - [Java Basis](./java/README.md/#java-basis)
 - [Java Concurrency](./java/README.md/#java-concurrency)
-- [JVM](./java/README.md/#jvm)
+- [Design Patterns](./java/README.md#design-patterns)
 - [Spring](./java/README.md/#spring-framework)
 - [Netty](./java/README.md/#netty)
-
-## :pencil:Frontend
-- [CSS](./frontend/README.md/#css)
-- [JavaScript](./frontend/README.md/#javascript)
-- [Wechat APP](./frontend/README.md/#wechat-app)
+- [JVM](./java/README.md/#jvm)
 
 ## :cd:Database
 - [MySQL](./db/README.md/#mysql)
 - [Redis](./db/README.md/#redis)
 - [ElasticSearch](./db/README.md/#elasticsearch)
 
-## :email:Message Queue
-- [Kafka](./mq/README.md/#kafka)
-- [RabbitMQ](./mq/README.md/#rabbitmq)
-
-## :gear:DevTool
-- [NPM](./tool/README.md#npm)
-- [Maven](./tool/README.md#maven)
-- [Git](./tool/README.md#git)
-- [Docker](./tool/README.md#docker)
+## :gear:Tool
+- [Linux 常用指令](./linux/linux.md)
+- [Vim 常用指令](./linux/vim.md)
+- [nohup与&的区别](./linux/nohup.md)
+- [Ubuntu20.04 常用配置和软件安装](./linux/ubuntu.md)
+- [NPM](./tool/npm.md)
+- [Maven](./tool/maven.md)
+- [Git](./tool/git.md)
+- [Docker](./tool/docker.md)

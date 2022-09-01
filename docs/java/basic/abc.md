@@ -100,12 +100,14 @@ Java 中的函数传参只有值传递，没有引用传递
 ### 匿名内部类
 
 ## 异常
-Java 中的异常有两类：运行时异常 (RuntimeException)、受检异常
+Java 中的异常整体分为两类：
+- 受检异常（Checked Exception）
+- 非受检异常（Unchecked Exception），也叫运行时异常（RuntimeException）
 
 | 类别       | 说明 | 举例|
 | ---------- | --------------------------- | ------------------------------- |
-| 运行时异常 | 可以不作处理，由虚拟机接管                   | ArithmeticException, IndexOutOfBoundsException |
 | 受检异常   | 必须要手动 catch or throws，否则无法通过编译 | IOException, SQLException                      |
+| 非受检异常 | 可以不作处理，由虚拟机接管                   | ArithmeticException, IndexOutOfBoundsException |
 
 ## 注解
 

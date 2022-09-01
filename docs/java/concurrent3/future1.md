@@ -3,10 +3,9 @@ prev: /java/concurrent/3-threadpool.md
 next: /java/concurrent/3-future2.md
 ---
 
-# Future 异步任务
-
+# Future
 ## Callable
-当线程池执行异步任务时，可以提交一个 Runnable 接口的实现，但这种方法有两个缺点：
+用线程池执行异步任务时，可以提交一个 Runnable 接口的实现，但这种方法有两个缺点：
 - run 方法没有返回值
 - run 方法不能抛出 checked Exception
 ```java
@@ -32,34 +31,35 @@ public interface Callable<V> {
 Future 接口的所有方法如下所示
 ```java
 public interface Future<V> {
+    V get() throws InterruptedException, ExecutionException;
+    V get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException;
     boolean cancel(boolean mayInterruptIfRunning);
     boolean isCancelled();
     boolean isDone();
-    V get() throws InterruptedException, ExecutionException;
-    V get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException;
 }
 ```
-
-如果要获取结果，可以在主线程调用 `get()`，此时有以下几种情况：
+::: tip get
+如果要获取异步任务的结果，可以在主线程调用 `get()`，此时有以下几种情况：
 - 如果任务已经完成，就直接获得结果
 - 如果任务还未完成，主线程就会阻塞，直到任务完成后才返回结果
-- 如果任务执行时抛出异常，get() 会抛出 `ExecutionException`，
-- 如果任务已经被取消，get() 会抛出 `CancellationException`
+- 如果任务执行时抛出异常，会抛出 `ExecutionException`，
+- 如果任务已经被取消，会抛出 `CancellationException`
+- 如果任务很耗时，可以用重载的 `get()` 限时等待，一旦超时就会抛出 `TimeoutException`，从而防止主线程一直阻塞
+:::
 
-如果异步任务比较耗时，希望限时等待结果，可以调用 `get(long timeout, TimeUnit unit)` ，一旦超时就会抛出 `TimeoutException`，这样可以防止主线程一直阻塞
-
+::: tip cancel
 如果想取消任务，可以调用 `cancel()`，此时有以下几种情况：
 - 如果任务还未开始，会取消成功，并返回 true
 - 如果任务已经结束，会取消失败，并返回 false
 - 如果任务正在执行，会根据参数 `mayInterruptIfRunning` 做判断
-
+:::
 
 下面演示几种 Future 的使用方法
 <CodeGroup>
 <CodeGroupItem title="阻塞等待" active>
 
 ```java{9}
-public static void test1() throws ExecutionException, InterruptedException {
+public void test1() throws ExecutionException, InterruptedException {
     ExecutorService executor = Executors.newFixedThreadPool(4);
     Future<String> future = executor.submit(() -> {
         Thread.sleep(2500);
@@ -77,7 +77,7 @@ public static void test1() throws ExecutionException, InterruptedException {
 <CodeGroupItem title="抛出异常">
 
 ```java{4}
-public static void test2() {
+public void test2() {
     ExecutorService executor = Executors.newFixedThreadPool(4);
     Future<String> future = executor.submit(() -> {
         throw new ArithmeticException("/ by zero");
@@ -95,7 +95,7 @@ public static void test2() {
 <CodeGroupItem title="限时等待">
 
 ```java{13,17}
-public static void test3() {
+public void test3() {
     ExecutorService executor = Executors.newFixedThreadPool(4);
     Future<String> future = executor.submit(() -> {
         try {
@@ -121,7 +121,7 @@ public static void test3() {
 <CodeGroupItem title="批量执行" active>
 
 ```java{9}
-public static void test4() throws ExecutionException, InterruptedException {
+public void test4() throws ExecutionException, InterruptedException {
     ExecutorService executor = Executors.newFixedThreadPool(4);
     List<Future<String>> futures = new ArrayList<>();
     for (int i = 0; i < 20; i++) {
@@ -161,7 +161,7 @@ public class FutureTask<V> implements RunnableFuture<V> {
 
 将它提交给线程池后，可以直接通过 FutureTask 本身获取结果，不用再额外创建 Future 对象
 ```java{8}
-public static void test5() throws ExecutionException, InterruptedException {
+public void test5() throws ExecutionException, InterruptedException {
     ExecutorService executor = Executors.newFixedThreadPool(4);
     FutureTask<String> futureTask = new FutureTask<>(() -> {
         Thread.sleep(500);
@@ -204,5 +204,3 @@ public abstract class AbstractExecutorService implements ExecutorService {
     }
 }
 ```
-
-## 参考文献

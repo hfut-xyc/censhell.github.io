@@ -20,5 +20,3 @@ Spring AOP 内部实现依然遵循以下原则
 
 - [Spring AOP 扫盲](https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247486644&idx=1&sn=bce7bcf78feb62c77e0b9bbf3893398e&chksm=ebd74db5dca0c4a3c8f5e03b754607442e77dd212f1ebe5c66f1914d6300fd418dfe849e4b10&mpshare=1&scene=23&srcid=0618FK8mRWjbZ8dyGIaGagfy&sharer_sharetime=1655565040551&sharer_shareid=3de7d51a86241055cb157f66dbfd4010#rd)
 - [Spring【AOP模块】就这么简单](https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247483954&idx=1&sn=b34e385ed716edf6f58998ec329f9867&chksm=ebd74333dca0ca257a77c02ab458300ef982adff3cf37eb6d8d2f985f11df5cc07ef17f659d4&scene=21###wechat_redirect)
-
-https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247483954&idx=1&sn=b34e385ed716edf6f58998ec329f9867&chksm=ebd74333dca0ca257a77c02ab458300ef982adff3cf37eb6d8d2f985f11df5cc07ef17f659d4&scene=21###wechat_redirect
