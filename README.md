@@ -37,7 +37,7 @@ Vuepress2 默认提供了很多[增强版 markdown 功能](https://v2.vuepress.v
 ### 代码块选项卡
 ```md
 <CodeGroup>
-<CodeGroupItem title="YARN" active>
+<CodeGroupItem title="YARN">
 
 </CodeGroupItem>
 <CodeGroupItem title="NPM" >

@@ -20,21 +20,19 @@
 - [线程的状态](./concurrent1/thread-status.md)
 - [线程的通信](concurrent1/wait-notify.md)
 
-### 底层原理
+### 底层原理 <Badge type="warning" text="v2" vertical="middle" />
 - [synchronized](./concurrent2/synchronized.md)
 - [volatile](./concurrent2/volatile.md)
 - [final](./concurrent2/final.md)
 
 ### JUC 并发工具
+- [Atomic](./concurrent3/atomic.md)
+- [ThreadLocal](./concurrent3/threadlocal.md)
+- [AQS](./concurrent3/aqs.md)
+- [并发容器](./concurrent3/container.md)
 - [线程池](./concurrent3/threadpool.md)
 - [Future](./concurrent3/future1.md)
 - [CompletableFuture](./concurrent3/future2.md)
-- [Atomic](./concurrent3/atomic.md)
-- [ThreadLocal](./concurrent3/threadlocal.md)
-- [并发容器](./concurrent3/container.md)
-- [AQS](./concurrent3/aqs.md)
-- [Lock](./concurrent3/lock.md)
-- [ForkJoin]()
 
 ## <div align="center">Spring Framework</div>
 ### Spring

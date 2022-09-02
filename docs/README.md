@@ -3,6 +3,8 @@
 ## :computer:Algorithm
 - [动态规划](algorithm/dp.md)
 - [链表](algorithm/list.md)
+- [二叉树](algorithm/tree.md)
+- [多线程](algorithm/thread.md)
 
 ## :coffee:Java
 - [Java Basis](./java/README.md/#java-basis)
@@ -15,7 +17,6 @@
 ## :cd:Database
 - [MySQL](./db/README.md/#mysql)
 - [Redis](./db/README.md/#redis)
-- [ElasticSearch](./db/README.md/#elasticsearch)
 
 ## :gear:Tool
 - [Linux 常用指令](./linux/linux.md)

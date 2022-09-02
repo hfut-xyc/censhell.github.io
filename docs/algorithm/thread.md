@@ -2,142 +2,224 @@
 ## 按序打印
 > [https://leetcode.cn/problems/print-in-order/](https://leetcode.cn/problems/print-in-order/)
 
-第一种解法可以使用 Semaphore
 
-::: details Solution 1
-``` java
-import java.util.concurrent.Semaphore;
+<CodeGroup>
+<CodeGroupItem title="Ans1" >
 
-public class PrintInOrder {
+```java
+/**
+ * synchronized + wait / notify + flag
+ */
+@Slf4j
+public class PrintOrder1 {
+    private static volatile int flag = 1;
+    private static final Object lock = new Object();
 
+    public static void first() throws InterruptedException {
+        synchronized (lock) {
+            while (flag != 1) {
+                lock.wait();
+            }
+            log.info("first");
+            flag = 2;
+            lock.notifyAll();
+        }
+    }
+
+    public static void second() throws InterruptedException {
+        synchronized (lock) {
+            while (flag != 2) {
+                lock.wait();
+            }
+            log.info("second");
+            flag = 3;
+            lock.notifyAll();
+        }
+    }
+
+    public static void third() throws InterruptedException {
+        synchronized (lock) {
+            while (flag != 3) {
+                lock.wait();
+            }
+            log.info("third");
+        }
+    }
+}
+
+```
+</CodeGroupItem>
+
+<CodeGroupItem title="Ans2">
+
+```java
+/**
+ * ReentrantLock + Condition + flag
+ */
+@Slf4j
+public class PrintOrder2 {
+    private static volatile int flag = 1;
+    private static final Lock lock = new ReentrantLock();
+    private static final Condition condition = lock.newCondition();
+
+    public static void first() throws InterruptedException {
+        lock.lock();
+        try {
+            while (flag != 1) {
+                condition.await();
+            }
+            log.info("first");
+            flag = 2;
+            condition.signalAll();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public static void second() throws InterruptedException {
+        lock.lock();
+        try {
+            while (flag != 2) {
+                condition.await();
+            }
+            log.info("second");
+            flag = 3;
+            condition.signalAll();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public static void third() throws InterruptedException {
+        lock.lock();
+        try {
+            while (flag != 3) {
+                condition.await();
+            }
+            log.info("third");
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+
+```
+</CodeGroupItem>
+
+<CodeGroupItem title="Ans3">
+
+```java
+/**
+ * Spin + flag
+ */
+@Slf4j
+public class PrintOrder3 {
+    private static volatile int flag = 1;
+
+    public static void first() throws InterruptedException {
+        while (flag != 1) {
+            Thread.yield();
+        }
+        log.info("first");
+        flag = 2;
+    }
+
+    public static void second() throws InterruptedException {
+        while (flag != 2) {
+            Thread.yield();
+        }
+        log.info("second");
+        flag = 3;
+    }
+
+    public static void third() throws InterruptedException {
+        while (flag != 3) {
+            Thread.yield();
+        }
+        log.info("third");
+    }
+}
+```
+</CodeGroupItem>
+
+<CodeGroupItem title="Ans4">
+
+```java
+/**
+ * Semaphore
+ */
+@Slf4j
+public class PrintOrder4 {
     private static Semaphore second = new Semaphore(0);
     private static Semaphore third = new Semaphore(0);
 
-    public static void first()  {
-        System.out.println("first");
+    public static void first() {
+        log.info("first");
         second.release();
     }
 
-    public static void second()  {
-        try {
-            second.acquire();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("second");
+    public static void second() throws InterruptedException {
+        second.acquire();
+        log.info("second");
         third.release();
     }
 
-    public static void third()  {
-        try {
-            third.acquire();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("third");
-    }
-
-    public static void main(String[] args) {
-        Thread t1 = new Thread(PrintInOrder::first);
-        Thread t2 = new Thread(PrintInOrder::second);
-        Thread t3 = new Thread(PrintInOrder::third);
-        t1.start();
-        t2.start();
-        t3.start();
+    public static void third() throws InterruptedException {
+        third.acquire();
+        log.info("third");
     }
 }
 ```
-:::
+</CodeGroupItem>
 
-::: details Solution 2
+<CodeGroupItem title="Ans5">
+
 ```java
-import java.util.concurrent.CountDownLatch;
-
-public class PrintInOrder2 {
-
+/**
+ * CountDownLatch
+ */
+@Slf4j
+public class PrintOrder5 {
     private static CountDownLatch second = new CountDownLatch(1);
     private static CountDownLatch third = new CountDownLatch(1);
 
-    public static void first()  {
-        System.out.println("first");
+    public static void first() {
+        log.info("first");
         second.countDown();
     }
 
-    public static void second()  {
-        try {
-            second.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("second");
+    public static void second() throws InterruptedException {
+        second.await();
+        log.info("second");
         third.countDown();
     }
 
-    public static void third()  {
-        try {
-            third.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("third");
-    }
-
-    public static void main(String[] args) {
-        Thread t1 = new Thread(PrintInOrder2::first);
-        Thread t2 = new Thread(PrintInOrder2::second);
-        Thread t3 = new Thread(PrintInOrder2::third);
-        t1.start();
-        t2.start();
-        t3.start();
+    public static void third() throws InterruptedException {
+        third.await();
+        log.info("third");
     }
 }
-
 ```
-:::
+</CodeGroupItem>
+</CodeGroup>
+
 
 ## 交替打印
 > [https://leetcode.cn/problems/print-foobar-alternately/](https://leetcode.cn/problems/print-foobar-alternately/)
 
-::: details Solution 
+<CodeGroup>
+
+<CodeGroupItem title="Ans1">
+
 ```java
-import java.util.concurrent.Semaphore;
 
-public class PrintFooBar {
-
-    private static int n = 5;
-    private static Semaphore foo = new Semaphore(1);
-    private static Semaphore bar = new Semaphore(0);
-
-    public static void foo() {
-        for (int i = 1; i <= n; i++) {
-            try {
-                foo.acquire();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("foo");
-            bar.release();
-        }
-    }
-
-    public static void bar() {
-        for (int i = 1; i <= n; i++) {
-            try {
-                bar.acquire();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("bar");
-            foo.release();
-        }
-    }
-
-    public static void main(String[] args) {
-        Thread t1 = new Thread(PrintFooBar::foo);
-        Thread t2 = new Thread(PrintFooBar::bar);
-        t1.start();
-        t2.start();
-    }
-}
 ```
-:::
+</CodeGroupItem>
+
+<CodeGroupItem title="">
+</CodeGroupItem>
+
+<CodeGroupItem title="">
+</CodeGroupItem>
+
+</CodeGroup>

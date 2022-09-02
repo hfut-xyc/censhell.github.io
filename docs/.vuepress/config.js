@@ -33,10 +33,10 @@ module.exports = {
     sidebar: 'auto',
     navbar: [
       {
-        text: 'Index', link: '/'
+        text: 'Index', link: '/#algorithm'
       },
       {
-        text: 'Algorithm', link: '/algorithm'
+        text: 'Algorithm', link: '/'
       },
       {
         text: 'Java', link: '/java'
@@ -45,7 +45,7 @@ module.exports = {
         text: 'Database', link: '/db'
       },
       {
-        text: 'DevTool', link: '/tool'
+        text: 'Tool', link: '/#tool'
       },
     ]
   })
