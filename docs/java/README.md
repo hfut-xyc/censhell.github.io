@@ -18,9 +18,10 @@
 - [线程的创建](./concurrent1/thread-create.md)
 - [线程的中断](./concurrent1/thread-interrupt.md)
 - [线程的状态](./concurrent1/thread-status.md)
-- [线程的通信](concurrent1/wait-notify.md)
+- [线程的通信](./concurrent1/thread-communicate.md)
+- [线程安全分析](./concurrent1/thread-safe.md)
 
-### 底层原理 <Badge type="warning" text="v2" vertical="middle" />
+### 底层原理
 - [synchronized](./concurrent2/synchronized.md)
 - [volatile](./concurrent2/volatile.md)
 - [final](./concurrent2/final.md)

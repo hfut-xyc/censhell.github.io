@@ -14,6 +14,36 @@ public class ThreadLocalDemo {
 }
 ```
 
+## 应用场景
+
+### SimpleDateFormat
+```java
+
+```
+
+### AOP 统计方法运行耗时
+
+### MyBatis
+Mybatis 中保持事务连接的一致
+```java
+public class SqlSessionManager implements SqlSessionFactory, SqlSession {
+
+    private final SqlSessionFactory sqlSessionFactory;
+    private final SqlSession sqlSessionProxy;
+
+    private final ThreadLocal<SqlSession> localSqlSession = new ThreadLocal<>();
+
+    private SqlSessionManager(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
+        this.sqlSessionProxy = (SqlSession) Proxy.newProxyInstance(
+            SqlSessionFactory.class.getClassLoader(),
+            new Class[]{SqlSession.class},
+            new SqlSessionInterceptor());
+    }
+}
+
+```
+
 ## 原理
 ```java
 public class Thread implements Runnable {
@@ -97,28 +127,7 @@ public class ThreadLocal<T> {
 }
 ```
 
-## 应用场景
 
-### MyBatis
-Mybatis 中保持事务连接的一致
-```java
-public class SqlSessionManager implements SqlSessionFactory, SqlSession {
-
-    private final SqlSessionFactory sqlSessionFactory;
-    private final SqlSession sqlSessionProxy;
-
-    private final ThreadLocal<SqlSession> localSqlSession = new ThreadLocal<>();
-
-    private SqlSessionManager(SqlSessionFactory sqlSessionFactory) {
-        this.sqlSessionFactory = sqlSessionFactory;
-        this.sqlSessionProxy = (SqlSession) Proxy.newProxyInstance(
-            SqlSessionFactory.class.getClassLoader(),
-            new Class[]{SqlSession.class},
-            new SqlSessionInterceptor());
-    }
-}
-
-```
 
 ## 参考文献
 - [慕课网免费课-ThreadLocal](https://www.imooc.com/learn/1217)

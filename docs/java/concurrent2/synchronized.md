@@ -27,4 +27,4 @@ synchronized 用于修饰实例方法、静态方法和代码块，表明该区�
 
 
 ## 参考文献
-- [《深入浅出 Java 多线程》](http://concurrent.redspider.group/article/02/7.html)
+- [《深入浅出 Java 多线程》](http://concurrent.redspider.group/article/02/8.html)
