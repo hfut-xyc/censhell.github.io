@@ -1,49 +1,8 @@
-# 动态规划
-<div align="center">
-    <a href="https://leetcode.cn/problemset/all/?topicSlugs=dynamic-programming" target="blank"> 
-      <img src="https://badgen.net/badge/LeetCode/Dynamic Programming/blue?icon=sourcegraph&">
-    </a>
-</div>
+# 动态规划-中等题
 
-## 简单题
-### 爬楼梯
-> [https://leetcode-cn.com/problems/climbing-stairs/](https://leetcode-cn.com/problems/climbing-stairs/)
-
-::: details Solution 
-```java
-class Solution {
-    public int climbStairs(int n) {
-        int[] dp = new int[n + 1];
-        // 1.initial state
-        dp[0] = 0;
-        if (n > 0)
-            dp[1] = 1;
-        if (n > 1)
-            dp[2] = 2;
-        // 2.state transfer
-        for (int i = 3; i < n + 1; i++) {
-            dp[i] = dp[i - 1] + dp[i - 2];
-        }
-        // 3.target state
-        return dp[n];
-    }
-}
-```
-:::
-
-### 最大子数组和
-> [https://leetcode-cn.com/problems/maximum-subarray/](https://leetcode-cn.com/problems/maximum-subarray/)
-::: details Solution
-```java
-```
-:::
-
-## 中等题
-::: warning 
-:::
-### 不同路径
+## 不同路径
 > [https://leetcode-cn.com/problems/unique-paths/](https://leetcode-cn.com/problems/unique-paths/)
-::: details Solution
+
 ```java
 class Solution {
     public int uniquePaths(int m, int n) {
@@ -69,12 +28,10 @@ class Solution {
     }
 }
 ```
-:::
 
-### 最小路径和
+## 最小路径和
 > [https://leetcode-cn.com/problems/minimum-path-sum/](https://leetcode-cn.com/problems/minimum-path-sum/)
 
-::: details Solution
 ```java
 class Solution {
     public int minPathSum(int[][] grid) {
@@ -102,11 +59,11 @@ class Solution {
     }
 }
 ```
-:::
 
-### 最小下降路径和
+
+## 最小下降路径和
 > [https://leetcode.cn/problems/minimum-falling-path-sum/](https://leetcode.cn/problems/minimum-falling-path-sum/)
-::: details Solution
+
 ```java
 class Solution {
     public int minFallingPathSum(int[][] matrix) {
@@ -141,15 +98,15 @@ class Solution {
     }
 }
 ```
-:::
 
 
 
 
-### 打家劫舍
+
+## 打家劫舍
 > [https://leetcode-cn.com/problems/house-robber](https://leetcode-cn.com/problems/house-robber)
 
-::: details Solution
+
 ```java
 public class Solution {
     public int rob(int[] nums) {
@@ -171,62 +128,41 @@ public class Solution {
         return dp[n - 1];
     }
 }
-
 ```
-:::
 
-### 零钱兑换
+## 零钱兑换
 > [https://leetcode-cn.com/problems/coin-change/](https://leetcode-cn.com/problems/coin-change/)
-::: details Solution
+
 ```java
 ```
-:::
 
-
-
-### 零钱兑换II
+## 零钱兑换II
 > [https://leetcode-cn.com/problems/coin-change-2/](https://leetcode-cn.com/problems/coin-change-2/)
-::: details Solution
+
 ```java
 ```
-:::
 
-
-### 最长回文子串
+## 最长回文子串
 > [https://leetcode.cn/problems/longest-palindromic-substring/](https://leetcode.cn/problems/longest-palindromic-substring/)
-::: details Solution
+
 ```java
 ```
-:::
 
-### 最长回文子序列
+## 最长回文子序列
 > [https://leetcode-cn.com/problems/longest-palindromic-substring](https://leetcode-cn.com/problems/longest-palindromic-substring)
-::: details Solution
+
 ```java
 ```
-:::
 
-
-### 最长递增子序列
+## 最长递增子序列
 > [https://leetcode-cn.com/problems/longest-increasing-subsequence](https://leetcode-cn.com/problems/longest-increasing-subsequence)
-::: details Solution
+
 ```java
 ```
-:::
 
-### 最长公共子序列 
+## 最长公共子序列 
 > [https://leetcode-cn.com/problems/longest-common-subsequence](https://leetcode-cn.com/problems/longest-common-subsequence)
-::: details Solution
-```java
-```
-:::
 
-## 困难题
-::: danger 
-:::
-### 编辑距离
-> [https://leetcode-cn.com/problems/edit-distance](https://leetcode-cn.com/problems/edit-distance)
-::: details Solution
 ```java
 ```
-:::
+

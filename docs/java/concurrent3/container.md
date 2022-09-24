@@ -13,8 +13,6 @@ Java 8 之前，ConcurrentHashMap采用`Segment + HashEntry`来实现底层结�
 
 在JDK1.8中，ConcurrentHashMap采用**数组+红黑树**来实现底层结构，采用**CAS + Synchronized**来保证并发安全：
 
-![]()
-
 - synchronized只锁定当前链表或红黑二叉树的首节点，只要hash不冲突，就不会产生并发，效率又提升N倍
 
 ``` java

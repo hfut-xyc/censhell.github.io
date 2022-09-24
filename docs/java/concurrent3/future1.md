@@ -1,8 +1,3 @@
----
-prev: /java/concurrent/3-threadpool.md
-next: /java/concurrent/3-future2.md
----
-
 # Future
 ## Callable
 用线程池执行异步任务时，可以提交一个 Runnable 接口的实现，但这种方法有两个缺点：

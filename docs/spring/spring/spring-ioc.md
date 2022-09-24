@@ -1,6 +1,6 @@
 # Spring Bean
 
-本文主要针对 Bean 的常见知识点做一个汇总
+本文主要对 Spring IoC 的常见知识点做一个总结
 
 ## 控制反转与依赖注入
 
@@ -167,12 +167,7 @@ public class Author {}
 @Documented
 public @interface Autowired {
 
-	/**
-	 * Declares whether the annotated dependency is required.
-	 * <p>Defaults to {@code true}.
-	 */
 	boolean required() default true;
-
 }
 ```
 
@@ -202,10 +197,9 @@ Spring Bean 默认使用单例模式，有以下优点：
 
 ### 单例模式 Bean 如何保证线程安全
 
-- 尽量避免使用成员变量，需要的话替换为局部变量
-- 使用 `ThreadLocal` 进行线程隔离
+- 尽量避免使用成员变量，可以替换为局部变量
 - 使用 `@Scope("prototype")` 将单例模式改为原型模式
-- 使用并发安全容器，如 `ConcurrentHashMap`
+- 使用 `ThreadLocal` 进行线程隔离
 
 ## Bean 的生命周期
 

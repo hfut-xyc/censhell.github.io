@@ -1,20 +1,15 @@
-## Maven
+# Maven
 Maven 主要用于 Java 的项目构建、依赖管理、打包发布
 
-### 依赖管理
-
-传递依赖
-排除依赖
-
-### 依赖冲突
-- 短路优先
-- 声明优先
-
-### 常用命令
-
+## 安装与配置
+下面演示如何在 Ubuntu 20.04 上安装 maven
 ```bash
-mvn -v
+tar -zxvf 
 
+mvn -v
+```
+## 常用命令
+```bash
 mvn clean
 
 mvn complie
@@ -27,6 +22,16 @@ mvn install
 
 mvn deploy
 ```
+## 依赖管理
+
+传递依赖
+排除依赖
+
+## 依赖冲突
+- 短路优先
+- 声明优先
+
+
 
 ### 打包发布
 

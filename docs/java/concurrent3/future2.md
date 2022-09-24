@@ -1,8 +1,3 @@
----
-prev: /java/concurrent/3-future.md
-next: /java/concurrent/3-atomic.md
----
-
 # CompletableFuture
 
 ```java
@@ -57,4 +52,3 @@ public static CompletableFuture<Object> anyOf(CompletableFuture<?>... cfs);
 
 ## 参考文献
 - [《Java 8 实战》第11章-CompletableFuture：组合式异步编程](https://book.douban.com/subject/26772632/)
-- 

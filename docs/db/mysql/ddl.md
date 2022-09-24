@@ -7,11 +7,33 @@ SQL 语言按照功能可以划分为四类：
 
 本文主要针对数据定义语言（DDL），从书写规范、数据类型等角度展开介绍
 
-## DDL 书写规范
-先看一个简单的示例
+## 数据类型
+### 整数类型
+tinyint 
+smallint 
+int 
+int(11)
+bigint
+
+### 字符串类型
+char
+varchar
+
+### 时间类型
+
+timestamp
+datetime 
+date
+time
+year
+
+## 字符集
+utf8 utf8mb4
+
+## DDL 实例
 ``` sql
-CREATE DATABASE IF NOT EXISTS `db_jwt`;
-USE `db_jwt`;
+CREATE DATABASE IF NOT EXISTS `db_test`;
+USE `db_test`;
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -24,13 +46,3 @@ CREATE TABLE `user` (
 ```
 考虑到代码的可读性和设计的完整性，建议在创建表时遵守如下规约：
 - 
-
-## 数据类型
-tinyint smallint int bigint
-int(11)
-char varchar
-datatime timestamp
-
-## 字符集
-utf8 utf8mb4
-

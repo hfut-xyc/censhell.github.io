@@ -127,7 +127,5 @@ public class ThreadLocal<T> {
 }
 ```
 
-
-
 ## 参考文献
 - [慕课网免费课-ThreadLocal](https://www.imooc.com/learn/1217)

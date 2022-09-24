@@ -205,14 +205,12 @@ volatile 用于修饰成员变量或静态变量，主要有两个作用：
 
 volatile 底层是通过内存屏障来实现可见性和有序性的
 
+### volatile 单例模式
+
 ### volatile vs synchronized
 volatile 只能保证可见性和有序性，不能保证原子性
 
 synchronized 可以保证可见性、有序性和原子性
-
-### volatile 的应用场景
-
-单例模式
 
 ## 参考文献
 - [《深入浅出 Java 多线程》第六章 Java内存模型基础知识](http://concurrent.redspider.group/article/02/6.html)

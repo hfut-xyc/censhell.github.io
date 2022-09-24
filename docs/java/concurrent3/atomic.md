@@ -1,44 +1,26 @@
 # Atomic 原子类
 
-## CompareAndSwap
-比较并交换（Compare And Swap, CAS）有这样三个值：
-- V：要更新的变量(var)
-- E：预期值(expected)
-- N：新值(new)
+## CAS
 
-比较并交换的过程如下：
-
+CAS（Compare And Set）是一种原子操作
 - 判断V是否等于E，如果等于，将V的值设置为N；
 - 如果不等，说明已经有其它线程更新了V，则当前线程放弃更新，什么都不做。
 
-有没有可能在判断V为E之后，正准备更新它的新值的时候，被其它线程更改了V的值？
-
-- 不会的。因为CAS是一种原子操作，是一条CPU的原子指令 CMPXCHG，从CPU层面保证它的原子性
-
 ## AtomicInteger
-
 ``` java
-public class AtomicInteger {
-
-    public final int getAndAdd(int delta) {
-        return unsafe.getAndAddInt(this, valueOffset, delta);
-    }
-
-    public final int getAndIncrement() {
-        return unsafe.getAndAddInt(this, valueOffset, 1);
-    }
-
-    public final int getAndDecrement() {
-        return unsafe.getAndAddInt(this, valueOffset, -1);
-    }
-
-    public final int getAndSet(int newValue) {
-        return unsafe.getAndSetInt(this, valueOffset, newValue);
-    }
-}
 
 ```
-CAS是一种原子操作，是一条CPU的原子指令 CMPXCHG，从CPU层面保证它的原子性
+
+## AtomicReference
+
+## AtomicArray
+
+## AtomicFieldUpdater
+
+## LongAdder
+
+
+## 源码分析
 ``` java
 public class Unsafe {
 
@@ -61,16 +43,6 @@ public class Unsafe {
     }
 }
 ```
-
-## AtomicArray
-
-## AtomicReference
-
-## AtomicFieldUpdater
-
-## LongAdder
-
-
 ## CAS的三大问题
 
 ### ABA问题

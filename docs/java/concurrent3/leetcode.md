@@ -1,4 +1,4 @@
-# 多线程
+# 按序打印 & 交替打印
 ## 按序打印
 > [https://leetcode.cn/problems/print-in-order/](https://leetcode.cn/problems/print-in-order/)
 
@@ -12,7 +12,7 @@
  */
 @Slf4j
 public class PrintOrder1 {
-    private static volatile int flag = 1;
+    private static int flag = 1;
     private static final Object lock = new Object();
 
     public static void first() throws InterruptedException {
@@ -58,7 +58,7 @@ public class PrintOrder1 {
  */
 @Slf4j
 public class PrintOrder2 {
-    private static volatile int flag = 1;
+    private static int flag = 1;
     private static final Lock lock = new ReentrantLock();
     private static final Condition condition = lock.newCondition();
 

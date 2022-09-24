@@ -1,14 +1,32 @@
 # Ubuntu20.04 常用配置和软件安装 
 
-本文以 **Ubuntu 20.04** 系统为例，简要介绍一下刚装好的 Linux 应该如何配置
+本文以 Ubuntu 20.04 系统为例，简要介绍一下刚装好的 Linux 应该如何配置
 
 ## 更换软件源
-一般来说新系统要做的第一件事就是换源，不然下载速度会很慢，首先要修改配置文件
+一般来说拿到新系统首先要换源，先备份，然后再修改配置文件
 ```bash
-sudo gedit /etc/apt/sources.list
+# 备份后修改配置
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+sudo vi /etc/apt/sources.list
+
+# 保存退出，让配置生效
+sudo apt update
 ```
-可以换成阿里云的源
+常用源如下，选一个就行了
 ```bash
+# USTC 源
+deb https://mirrors.ustc.edu.cn/ubuntu/ focal main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse
+
+# aliyun 源
 deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
 deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
 deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
@@ -20,27 +38,23 @@ deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted univers
 deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
 deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
 ```
-保存后记得更新源
-```bash
-sudo apt update
-```
-
 
 ## 设置root用户密码
-Ubuntu 默认是没有设置 root 用户密码的，切换 root 用户前记得先设置密码
+全新的 Ubuntu 默认是没有设置 root 用户密码的，切换 root 用户前记得先设置密码
 ```bash
 sudo passwd root
 ```
-## 设置双系统默认启动项
-如果你是双系统，可以修改 GRUB 配置文件来选择默认开机启动项；如果你是虚拟机，可以跳过本小节
-```bash
-sudo vi /etc/default/grub
-```
+
 ## 设置主机名
 ```bash
 sudo vi /etc/hostname
 ```
 
+## 设置双系统默认启动项
+如果你是双系统，可以修改 GRUB 配置文件来选择默认开机启动项
+```bash
+sudo vi /etc/default/grub
+```
 
 ## 常用软件安装
 ### gcc/g++
@@ -59,55 +73,56 @@ Ubuntu 默认没有安装 openssh-server，安装之后才能用 ssh 远程访�
 sudo apt install openssh-server
 systemctl status ssh
 ```
-### git
-```bash
-sudo apt install git
-```
-### zsh/oh my zsh
 
+### oh my zsh
 ```bash
+# 首先安装 zsh
 sudo apt install zsh
+# 检查 zsh 是否安装成功
 cat /etc/shells
+# 切换为 zsh
+chsh -s /bin/zsh
+# 检查 zsh 是否切换成功
 echo $SHELL
-sudo chsh -s /bin/zsh
+
+# 再安装 oh my zsh，确保安装了 Git，否则会安装失败
+wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+sh install.sh
+
+# 下载 incr 插件（命令行自动补全，可选）
+cd ~/.oh-my-zsh/plugins/
+mkdir incr & cd incr
+wget http://mimosa-pudica.net/src/incr-0.2.zsh
+# 配置 incr 插件
+vim ~/.zshrc
+# 添加到配置文件末尾，保存退出
+source ~/.oh-my-zsh/plugins/incr/incr*.zsh
+# 让配置生效
+source ~/.zshrc
 ```
 
 ### Java
 - 如果是虚拟机或者云服务器，可以先在 Windows 下载 [JDK1.8压缩包](https://pan.baidu.com/s/1zjriuEPC4pXF92lm1Ql0TQ) (提取码：jdk8)
 - 然后将压缩包通过 [XFTP](https://www.xshell.com/zh/free-for-home-school/) 传到 /home/USERNAME 目录下
-- 将压缩包解压到 /usr/local 目录下
 ```bash
+# 将压缩包解压到 /usr/local 目录下
 sudo mv ~/jdk-8u241-linux-x64.tar.gz /usr/local
 sudo tar -zxvf jdk-8u241-linux-x64.tar.gz
-```
-配置环境变量，可以选择用局部配置还是全局配置
 
-```bash
-# local
+# 全局配置  
+sudo vi /etc/profile
+
+# 局部配置
 vi ~/.bashrc 
 
-# global  
-sudo vi /etc/profile 
-```
-在文件末尾添加如下内容
-```bash
+# 添加到配置文件末尾，保存退出
 export JAVA_HOME=/usr/local/jdk1.8.0_241/
 export PATH=$PATH:$JAVA_HOME/bin
-```
-保存退出后，记得让配置文件生效
 
-```bash
+# 让配置生效
 source ~/.bashrc
 ```
 
-
-### MySQL
-
-
-### Docker
-
-
- 
 ### 常用文件、目录
 - /etc/hostname
 - /etc/hosts

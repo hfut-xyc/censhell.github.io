@@ -1,4 +1,4 @@
-# nohup与&的区别
+# 命令行使用 nohup 与 & 的区别
 
 ## 普通情况
 首先编写一个简单的python程序：每隔 1s 打印一个 helloworld
@@ -49,8 +49,6 @@ nohup: ignoring input and appending output to 'nohup.out'
 ^C
 xyc@hfut:~$
 ```
-
-
 
 ## nohup cmd &
 现在把 nohup 和 & 都加上

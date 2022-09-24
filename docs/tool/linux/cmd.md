@@ -15,15 +15,15 @@
 - rm: 删除文件或目录
 - mv: 移动（重命名）文件或目录
 - stat：查看文件属性
+- tar：
+- gzip：
+- unzip：
 - find：在指定目录下查找文件
 - which：查找命令所在目录
 - whereis：查找命令以及文档所在目录
 - **chown：修改文件所属用户和用户组**
 - **chmod：修改文件权限**
 - chsh：修改当前的终端
-- tar：
-- gzip：
-- unzip：
 
 ### 文本处理
 - cat：显示整个文件的内容，内容过多时不建议使用
@@ -108,6 +108,12 @@
 ---
 
 ## 2.实战
+### cat
+```bash
+# 合并多个 .tar.00x 文件为一个
+cat test.tar.001 test.tar.002 > test.tar
+```
+
 ### find
 ```bash
 ### 在home目录下查找文件
@@ -220,9 +226,6 @@ ls -l | grep '^d' | wc -l
 ```bash
 ## 仅查看所有分区大小
 lsblk
-
-## 查看磁盘分区详情
-sudo fdisk -l
 
 ## 查看所有分区大小和使用情况
 df -h

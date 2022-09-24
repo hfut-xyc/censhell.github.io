@@ -1,14 +1,10 @@
 
-# 链表
-<div align="center">
-    <a href="https://leetcode.cn/problemset/all/?topicSlugs=linked-list" target="blank"> 
-      <img src="https://badgen.net/badge/LeetCode/Linked List/blue?icon=sourcegraph&">
-    </a>
-</div>
+# 链表-简单题
+
 
 ## 两数相加
 > [https://leetcode.cn/problems/add-two-numbers/](https://leetcode.cn/problems/add-two-numbers/)
-::: details Solution
+
 ```java
 /**
  * Definition for singly-linked list.

@@ -117,42 +117,14 @@ private void grow(int minCapacity) {
 
 ### 注意事项
 
-#### ArrayList.subList
-
-::: tip
-subList 返回值不可强转成 ArrayList，否则会抛出 `ClassCastException`
-
-> 该方法返回值是 ArrayList 的内部类 SubList，是 ArrayList 的一个视图，对子列表的所有操作最终会反馈到原列表上
-> :::
-
-::: tip
-在 subList 场景中，对原列表的增加或删除，均会导致子列表的遍历、增加、删除抛出 `ConcurrentModificationException`
-:::
-
-#### Arrays.asList
-
-::: tip
-asList 将数组转换成集合后，不能使用 add/remove/clear 方法，否则会抛出 `UnsupportedOperationException`
-
-> 它返回的是 Arrays 的内部类 ArrayList，但是该类并没有实现集合的修改方法
->
-> 它体现了[适配器模式]()，如果修改了原数组的值，列表值也会随之改变
-
-:::
-
-```java
-String[] str = new String[] {"a", "b", "c"};   
-List list = Arrays.asList(str); 
-str[0] = "c"   // list.get(0) == "c"
-```
 
 #### toArray
 
 ::: tip
 使用集合转数组的方法，必须使用集合的 toArray(T[] array)，传入的是类型完全一致、长度为 0 的空数组
 
-> 无参的 `toArray()`，返回值只能是 `Object[]`，若强转其他类型数组将抛出 `ClassCastException`
-> :::
+无参的 `toArray()`，返回值只能是 `Object[]`，若强转其他类型数组将抛出 `ClassCastException`
+:::
 
 ```java
 public Object[] toArray() {
@@ -169,6 +141,31 @@ public <T> T[] toArray(T[] a) {
 }
 ```
 
+#### ArrayList.subList
+
+::: tip
+subList 返回值不可强转成 ArrayList，否则会抛出 `ClassCastException`
+该方法返回值是 ArrayList 的内部类 SubList，是 ArrayList 的一个视图，对子列表的所有操作最终会反馈到原列表上
+
+在 subList 场景中，对原列表的增加或删除，均会导致子列表的遍历、增加、删除抛出 `ConcurrentModificationException`
+
+:::
+
+#### Arrays.asList
+
+::: tip
+asList 将数组转换成集合后，不能使用 add/remove/clear 方法，否则会抛出 `UnsupportedOperationException`
+
+它返回的是 Arrays 的内部类 ArrayList，但是该类并没有实现集合的修改方法
+它体现了[适配器模式]()，如果修改了原数组的值，列表值也会随之改变
+
+:::
+
+```java
+String[] str = new String[] {"a", "b", "c"};   
+List list = Arrays.asList(str); 
+str[0] = "c"   // list.get(0) == "c"
+```
 ## LinkedList
 
 ## Vector
