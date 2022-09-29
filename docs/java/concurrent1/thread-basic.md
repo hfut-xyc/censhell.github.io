@@ -1,22 +1,29 @@
-# 线程的创建
+# 多线程基础
 
-## 两种基本方法
-线程的创建本质上只有 2 种方法：
-- 方法1：继承 Thread 类，重写 run 方法
-- 方法2：实现 Runnable 接口
+## 线程的创建
 
-::: tip
-[Oracle 官方文档](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Thread.html) 原文如下
+::: tip JDK 官方文档原文如下
+> [文档链接](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Thread.html) 
 
 There are two ways to create a new thread of execution. 
 
-One is to declare a class to be a subclass of `Thread`. This subclass should override the `run` method of class `Thread`
+One is to declare a class to be a subclass of `Thread`. 
+This subclass should override the `run` method of class `Thread`
 
-The other way to create a thread is to declare a class that implements the `Runnable` interface. That class then implements the `run` method.
+The other way to create a thread is to declare a class that implements the `Runnable` interface. 
+That class then implements the `run` method.
 :::
 
-演示代码如下
+线程的创建**本质上**只有两种方法：
+- 方法1：继承 Thread 类，重写 run 方法
+- 方法2：实现 Runnable 接口
 
+在此基础上还衍生出一些其他的方法：
+- 线程池+Runnable
+- 线程池+Callable
+- Timer
+
+演示代码如下
 <CodeGroup>
 <CodeGroupItem title="方法1" active>
 
@@ -52,38 +59,6 @@ public class ThreadCreation {
 }
 ```
 </CodeGroupItem>
-</CodeGroup>
-
-## 两者的本质区别
-通过查看 Thread 类的源码可知：
-- 方法 1 是直接重写了整个 run 方法
-- 方法 2 是调用了传入的 Runnable 接口的 run 方法
-
-一般来说我们更推荐使用方法 2
-```java
-public class Thread {
-    
-    /* What will be run. */
-    private Runnable target;
-    
-    @Override
-    public void run() {
-        if (target != null) {
-            target.run();
-        }   
-    }   
-}
-```
-
-## 其他的方法
-网上有人认为除了这两种还有其他方法，例如：
-- 线程池+Runnable
-- 线程池+Callable
-- Timer
-
-其实这种说法是不准确的，因为它们的底层实现还是用到了两种最基本的方法
-
-<CodeGroup>
 <CodeGroupItem title="线程池+Runnable" active>
 
 ``` java
@@ -119,4 +94,57 @@ public static void main(String[] args) {
 }
 ```
 </CodeGroupItem>
+
 </CodeGroup>
+
+通过查看 Thread 类的源码可知：
+- 方法 1 是直接重写了整个 run 方法
+- 方法 2 是调用了传入的 Runnable 接口的 run 方法
+```java
+public class Thread {
+    
+    /* What will be run. */
+    private Runnable target;
+    
+    @Override
+    public void run() {
+        if (target != null) {
+            target.run();
+        }   
+    }   
+}
+```
+
+
+## 线程的中断
+
+### 打断 sleep, wait, join 方法
+
+### 打断正常运行的方法
+
+### 打断 LockSupport 方法
+
+## 线程的状态
+
+```java
+public enum State {
+    NEW,
+    RUNNABLE,
+    BLOCKED,
+    WAITING,
+    TIMED_WAITING,
+    TERMINATED;
+}
+```
+
+| State | Description |
+|--|--|
+| NEW |  线程刚创建，还未调用 `start()` 启动 |
+| RUNNABLE | 可能正在运行，也有可能在等待 CPU 分配时间片 |
+| TERMINATED |  |
+| BLOCKED | 等待锁的释放以进入临界区 |
+| WAITING |  |
+| TIMED_WAITING |  |
+
+
+## 守护线程

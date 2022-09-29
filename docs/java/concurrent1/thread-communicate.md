@@ -1,12 +1,12 @@
-# 线程的通信
+# 多线程通信
 
-## Monitor wait / notify
-
-
-## Condition await / signal
+## Object-wait/notify
 
 
-## LockSupport
+## Condition-await/signal
+
+
+## LockSupport-park/unpark
 
 
 

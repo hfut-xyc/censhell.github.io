@@ -75,5 +75,3 @@ String s5 = s1 + s2;            // constant pool
 System.out.println(s3 == s5);   // true
 System.out.println(s4 == s5);   // true
 ```
-## 参考文献
-- 

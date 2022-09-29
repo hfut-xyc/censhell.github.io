@@ -1,7 +1,3 @@
----
-next: /java/concurrent/3-future.md
----
-
 # 线程池
 
 ## 介绍
@@ -165,7 +161,7 @@ private boolean addWorker(Runnable firstTask, boolean core) {
 | TERMINATED | 调用 `terminate()` 后进入该状态                                  |
 
 线程池的生命周期如下图所示
-![]()
+
 
 与线程池状态相关的常用函数如下所示
 ```java

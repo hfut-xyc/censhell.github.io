@@ -1,6 +1,5 @@
-# Map
-本文主要介绍集合框架中的 HashMap, TreeMap, HashTable
-## HashMap
+
+# HashMap
 HashMap 是 `java.util.collection` 包下一种常用的数据结构，用于存放键值对，采用拉链法解决 Hash 冲突，是线程不安全的
 
 Java8 之前，HashMap 的实现基于 `数组+链表`，链表采用 `头插法`
@@ -11,7 +10,7 @@ Java8 之后，HashMap 的实现基于 `数组+链表+红黑树`，链表采用 
 
 HashMap 的键值都可以为 null，但 null 作为键 `只能有一个`，null 作为值可以有多个
 
-### 常量与变量
+## 常量与变量
 
 ``` java
 public class HashMap<K,V> extends AbstractMap<K,V> 
@@ -55,7 +54,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
 }
 ```
 
-### 初始化
+## 初始化
 
 HashMap 默认的初始化数组长度为 16，每次扩充后变为原来的 2 倍
 
@@ -85,7 +84,7 @@ public HashMap(int initialCapacity, float loadFactor) {
 }
 ```
 
-### get 操作
+## get 操作
 核心方法为 getNode
 ``` java
 public V get(Object key) {
@@ -113,9 +112,9 @@ final Node<K,V> getNode(int hash, Object key) {
     return null;
 }
 ```
-### put 操作
+## put 操作
 核心方法为 putVal
-#### putVal
+### putVal
 
 ``` java {9,10,57,58}
 public V put(K key, V value) {
@@ -179,7 +178,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent, boolean evict) {
 } 
 ```
 
-#### treeifyBin
+### treeifyBin
 
 treeifyBin 并不一定会把链表转为红黑树，当链表长度达到 8，但 table 长度小于 64 时，只会进行扩容
 
@@ -206,7 +205,7 @@ final void treeifyBin(Node<K,V>[] tab, int hash) {
 }
 ```
 
-#### resize
+### resize
 
 resize 是扩容操作，会触发这一操作的情况只有 3 种：
 
@@ -294,175 +293,3 @@ final Node<K,V>[] resize() {
     return newTab;
 }
 ```
-## TreeMap
-
-TreeMap是完全基于红黑树构建的，因此它是有序的
-
-### 初始化
-``` java
-public class TreeMap<K,V> extends AbstractMap<K,V>
-    implements NavigableMap<K,V>, Cloneable, java.io.Serializable
-{
-    private final Comparator<? super K> comparator;
-
-    private transient Entry<K,V> root;
-
-    private transient int size = 0;
-
-    private transient int modCount = 0;
-    
-    // 默认构造函数不提供比较器
-    public TreeMap() {
-        comparator = null;
-    }
-}
-```
-
-#### put
-
-``` java
-public V put(K key, V value) {
-    Entry<K,V> t = root;
-    if (t == null) {
-        compare(key, key); // type (and possibly null) check
-
-        root = new Entry<>(key, value, null);
-        size = 1;
-        modCount++;
-        return null;
-    }
-    int cmp;
-    Entry<K,V> parent;
-    Comparator<? super K> cpr = comparator;
-    // 如果提供了默认的比较器
-    if (cpr != null) {
-        do {
-            parent = t;
-            cmp = cpr.compare(key, t.key);
-            if (cmp < 0)
-                t = t.left;
-            else if (cmp > 0)
-                t = t.right;
-            else
-                return t.setValue(value);
-        } while (t != null);
-    }
-    // 如果没有提供比较器
-    else {
-        if (key == null) {
-            throw new NullPointerException();
-            Comparable<? super K> k = (Comparable<? super K>) key;
-        }
-        do {
-            parent = t;
-            cmp = k.compareTo(t.key);
-            if (cmp < 0)
-                t = t.left;
-            else if (cmp > 0)
-                t = t.right;
-            else
-                return t.setValue(value);
-        } while (t != null);
-    }
-    Entry<K,V> e = new Entry<>(key, value, parent);
-    if (cmp < 0)
-        parent.left = e;
-    else
-        parent.right = e;
-    // 插入完成后，从插入节点处开始修正整棵树
-    fixAfterInsertion(e);
-    size++;
-    modCount++;
-    return null;
-}
-```
-
-#### 插入后修正
-``` java
-private void fixAfterInsertion(Entry<K,V> x) {
-    x.color = RED;
-    while (x != null && x != root && x.parent.color == RED) {
-         // 1.若当前节点x的父节点是祖父节点的左子节点
-        if (parentOf(x) == leftOf(parentOf(parentOf(x)))) {
-            Entry<K,V> y = rightOf(parentOf(parentOf(x)));
-            // 若当前节点x的叔叔节点y是红色
-            if (colorOf(y) == RED) {
-                // 将父节点和叔叔节点都变黑，祖父节点变红    
-                setColor(parentOf(x), BLACK);
-                setColor(y, BLACK);
-                setColor(parentOf(parentOf(x)), RED);
-                // 当前节点指向祖父节点，进入下一轮循环
-                x = parentOf(parentOf(x));
-            }
-            // 若当前节点x的叔叔节点y是黑色
-            else {
-                // 2.若当前节点x是其父节点的右子节点，则从x的父节点处左旋
-                if (x == rightOf(parentOf(x))) {
-                    x = parentOf(x);
-                    rotateLeft(x);
-                }
-                // 3.将当前节点x的父节点变黑，祖父节点变红，从祖父节点处右旋
-                setColor(parentOf(x), BLACK);
-                setColor(parentOf(parentOf(x)), RED);
-                rotateRight(parentOf(parentOf(x)));
-            }
-        }
-        // 若父节点是祖父节点的右子节点，操作与上面完全对称          
-        else {
-            Entry<K,V> y = leftOf(parentOf(parentOf(x)));
-            if (colorOf(y) == RED) {
-                setColor(parentOf(x), BLACK);
-                setColor(y, BLACK);
-                setColor(parentOf(parentOf(x)), RED);
-                x = parentOf(parentOf(x));
-            } else {
-                if (x == leftOf(parentOf(x))) {
-                    x = parentOf(x);
-                    rotateRight(x);
-                }
-                setColor(parentOf(x), BLACK);
-                setColor(parentOf(parentOf(x)), RED);
-                rotateLeft(parentOf(parentOf(x)));
-            }
-        }
-    }
-    root.color = BLACK;
-}
-```
-#### rotate
-``` java
-private void rotateLeft(Entry<K,V> p) {
-    if (p != null) {
-        Entry<K,V> r = p.right;
-        p.right = r.left;
-        if (r.left != null)
-            r.left.parent = p;
-        r.parent = p.parent;
-        if (p.parent == null)
-            root = r;
-        else if (p.parent.left == p)
-            p.parent.left = r;
-        else
-            p.parent.right = r;
-        r.left = p;
-        p.parent = r;
-    }
-}
-
-private void rotateRight(Entry<K,V> p) {
-    if (p != null) {
-        Entry<K,V> l = p.left;
-        p.left = l.right;
-        if (l.right != null) l.right.parent = p;
-        l.parent = p.parent;
-        if (p.parent == null)
-            root = l;
-        else if (p.parent.right == p)
-            p.parent.right = l;
-        else p.parent.left = l;
-        l.right = p;
-        p.parent = l;
-    }
-}
-```
-## HashTable

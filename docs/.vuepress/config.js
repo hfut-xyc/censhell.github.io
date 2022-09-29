@@ -42,16 +42,10 @@ module.exports = {
         children: [
           { text: 'Base->Concurrency->JVM', link: '/java/' },
           { text: 'Spring', link: '/spring/' },
-          // { text: 'Netty', link: '/netty/' },
         ]
       },
       {
-        text: 'Database',
-        children: [
-          { text: 'MySQL', link: '/db/mysql/' },
-          { text: 'Redis', link: '/db/redis/' },
-          { text: 'ElasticSearch', link: '/db/es/' }
-        ]
+        text: 'Database',link:  '/db'
       },
       {
         text: 'Tool',
@@ -71,26 +65,28 @@ module.exports = {
           text: 'Java 基础',
           collapsible: true,
           children: [
-            '/java/base1/abc.md',
-            '/java/base1/java8.md',
-            '/java/base1/io.md',
+            '/java/base1/syntax1.md',
+            '/java/base1/syntax2.md',
+            '/java/base1/syntax3.md',
             '/java/base1/string.md',
+            '/java/base1/io.md',
           ],
         },
         {
           text: 'Java 容器',
           collapsible: true,
           children: [
-            '/java/base2/list.md',
-            '/java/base2/map.md',
-            '/java/base2/set.md',
+            '/java/base2/arraylist.md',
+            '/java/base2/hashmap.md',
+            '/java/base2/treemap.md',
           ],
         },
         {
           text: 'Java 并发基础',
           collapsible: true,
           children: [
-            '/java/concurrent1/thread-create.md',
+            '/java/concurrent1/thread-basic.md',
+            '/java/concurrent1/thread-communicate.md',
             '/java/concurrent1/thread-safe.md',
           ],
         },
@@ -101,14 +97,16 @@ module.exports = {
             '/java/concurrent2/synchronized.md',
             '/java/concurrent2/volatile.md',
             '/java/concurrent2/final.md',
-          ],
+          ], 
         },
         {
           text: 'Java 并发工具',
           collapsible: true,
           children: [
             '/java/concurrent3/atomic.md',
+            '/java/concurrent3/threadlocal.md',
             '/java/concurrent3/container.md',
+            '/java/concurrent3/threadpool.md',
             '/java/concurrent3/future1.md',
             '/java/concurrent3/future2.md',
           ],

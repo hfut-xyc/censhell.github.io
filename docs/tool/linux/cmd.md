@@ -81,9 +81,7 @@
 
 ### 用户管理
 - su：切换用户
-- sudo
 - passwd
-- visudo：编辑 /etc/sudoers
 - useradd
 - userdel
 - usermod
