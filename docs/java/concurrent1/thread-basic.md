@@ -19,13 +19,12 @@ That class then implements the `run` method.
 - 方法2：实现 Runnable 接口
 
 在此基础上还衍生出一些其他的方法：
-- 线程池+Runnable
-- 线程池+Callable
-- Timer
+- 线程池+Runnable/Callable
+- FutureTask
 
 演示代码如下
 <CodeGroup>
-<CodeGroupItem title="方法1" active>
+<CodeGroupItem title="继承Thread" active>
 
 ``` java
 public class ThreadCreation {
@@ -45,7 +44,7 @@ public class ThreadCreation {
 ```
 </CodeGroupItem>
 
-<CodeGroupItem title="方法2">
+<CodeGroupItem title="实现Runnable">
 
 ``` java
 public class ThreadCreation {
@@ -59,42 +58,28 @@ public class ThreadCreation {
 }
 ```
 </CodeGroupItem>
-<CodeGroupItem title="线程池+Runnable" active>
+<CodeGroupItem title="线程池">
 
 ``` java
 public static void main(String[] args) {
     ExecutorService executor = Executors.newCachedThreadPool();
     executor.submit(() -> {
-        System.out.println(Thread.currentThread().getName());
+        System.out.println("HelloWorld");
     });
+
+    Future<String> future = executor.submit(() -> "HelloWorld");
 }
 ```
 </CodeGroupItem>
-<CodeGroupItem title="线程池+Callable">
+<CodeGroupItem title="">
 
 ``` java
 public static void main(String[] args) {
     ExecutorService executor = Executors.newCachedThreadPool();
-    Callable<String> callable = () -> Thread.currentThread().getName();
-    Future<String> future = executor.submit(callable);
+
 }
 ```
 </CodeGroupItem>
-<CodeGroupItem title="Timer">
-
-```java
-public static void main(String[] args) {
-    Timer timer = new Timer();
-    timer.scheduleAtFixedRate(new TimerTask() {
-        @Override
-        public void run() {
-            System.out.println(Thread.currentThread().getName());
-        }
-    }, 0, 1000);
-}
-```
-</CodeGroupItem>
-
 </CodeGroup>
 
 通过查看 Thread 类的源码可知：

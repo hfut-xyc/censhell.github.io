@@ -37,7 +37,7 @@ public interface Future<V> {
 如果要获取异步任务的结果，可以在主线程调用 `get()`，此时有以下几种情况：
 - 如果任务已经完成，就直接获得结果
 - 如果任务还未完成，主线程就会阻塞，直到任务完成后才返回结果
-- 如果任务执行时抛出异常，会抛出 `ExecutionException`，
+- 如果任务执行时抛出异常，会抛出 `ExecutionException`
 - 如果任务已经被取消，会抛出 `CancellationException`
 - 如果任务很耗时，可以用重载的 `get()` 限时等待，一旦超时就会抛出 `TimeoutException`，从而防止主线程一直阻塞
 :::
@@ -75,7 +75,7 @@ public void test1() throws ExecutionException, InterruptedException {
 public void test2() {
     ExecutorService executor = Executors.newFixedThreadPool(4);
     Future<String> future = executor.submit(() -> {
-        throw new ArithmeticException("/ by zero");
+        int i = 1 / 0;
     });
     try {
         Thread.sleep(1500);

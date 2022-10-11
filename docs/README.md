@@ -12,19 +12,13 @@
 ## :zap:Database
 - [MySQL](./db/README.md/#mysql)
 - [Redis](./db/README.md/#redis)
-- [ElasticSearch](./db/README.md/#ElasticSearch)
-
-## :bulb:Algorithm
-- [动态规划](./algorithm/README.md)
-- [链表](./algorithm/README.md)
-- [二叉树](./algorithm/README.md)
-- [多线程](./algorithm/README.md)
+- [ElasticSearch](./db/README.md/#elasticsearch)
 
 ## :gear:Tool
-- [Linux 常用指令](./tool/linux/cmd.md)
-- [vim 常用指令](./tool/linux/vim.md)
-- [命令行使用 nohup 与 & 的区别](./tool/linux/nohup.md)
-- [Ubuntu 20.04 常用配置和软件安装](./tool/linux/ubuntu.md)
+- [Linux cmd](./tool/linux/cmd.md)
+- [vim cmd](./tool/linux/vim.md)
+- [nohup vs &](./tool/linux/nohup.md)
+- [Ubuntu 20.04 Configuration](./tool/linux/ubuntu.md)
 - [Git](./tool/etc/git.md)
 - [NPM](./tool/etc/npm.md)
 - [Maven](./tool/etc/maven.md)

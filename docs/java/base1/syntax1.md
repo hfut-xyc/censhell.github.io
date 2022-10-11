@@ -1,6 +1,6 @@
 # Java 语法（上）
 
-## 数据类型
+## 基本数据类型
 
 Java 中有 8 种基本数据类型，分别对应 1 种 包装类型，如下表所示
 
@@ -20,14 +20,13 @@ Java 中有 8 种基本数据类型，分别对应 1 种 包装类型，如下�
 
 ### 自动装箱与拆箱
 ```java
-Integer i = 0;   // boxing
-int x = i;       // unboxing
+// boxing  
+Integer i = 0;  // Integer i = Integer.valueOf(0);
+
+// unboxing
+int x = i;      // int x = i.intValue();      
 ```
-等价于以下两行代码
-```java
-Integer i = Integer.valueOf(0);
-int x = i.intValue();
-```
+
 
 ### 基本类型与 String 转换
 ```java
@@ -50,23 +49,6 @@ int i = Integer.parseInt(str);
 - Boolean 创建了 True、False 的缓存数据
 - Float, Double 没有缓存机制
 
-
-## BigDecimal
-
-double 类型的计算有时候会造成精度丢失，所以涉及金额的计算务必使用 `BigDecimal`
-```java
-public class BigDecimalDemo {
-    public static void main(String[] args) {
-        System.out.println(0.1 + 0.2);
-        System.out.println(1.0 - 0.8);
-        System.out.println(2.013 * 100);
-        System.out.println(123.3 / 100);
-
-        System.out.println(new BigDecimal(0.1).add(new BigDecimal(0.2)));
-    }
-}
-```
-
 ```
 0.30000000000000004
 0.19999999999999996
@@ -75,7 +57,7 @@ public class BigDecimalDemo {
 0.3000000000000000166533453693773481063544750213623046875
 ```
 
-## Class Casting
+## 强制类型转换
 父类引用可以指向子类对象，在此前提下可以强转为子类引用
 ```java
 Object obj = new String();	// upcasting
@@ -90,6 +72,10 @@ String str = (String) obj;	// ClassCastException
 
 ## 参数传递
 Java 中的函数传参只有值传递，没有引用传递
+
+## super 关键字
+
+
 
 ## 内部类
 

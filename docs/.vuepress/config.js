@@ -35,12 +35,9 @@ module.exports = {
         text: 'Index', link: '/'
       },
       {
-        text: 'Algorithm', link: '/algorithm'
-      },
-      {
         text: 'Java',
         children: [
-          { text: 'Base->Concurrency->JVM', link: '/java/' },
+          { text: 'JDK', link: '/java/' },
           { text: 'Spring', link: '/spring/' },
         ]
       },
@@ -94,9 +91,9 @@ module.exports = {
           text: 'Java 并发原理',
           collapsible: true,
           children: [
-            '/java/concurrent2/synchronized.md',
-            '/java/concurrent2/volatile.md',
             '/java/concurrent2/final.md',
+            '/java/concurrent2/volatile.md',
+            '/java/concurrent2/synchronized.md',
           ], 
         },
         {
@@ -106,9 +103,24 @@ module.exports = {
             '/java/concurrent3/atomic.md',
             '/java/concurrent3/threadlocal.md',
             '/java/concurrent3/container.md',
+            '/java/concurrent3/aqs.md',
             '/java/concurrent3/threadpool.md',
+            '/java/concurrent3/forkjoin.md',
             '/java/concurrent3/future1.md',
             '/java/concurrent3/future2.md',
+          ],
+        },
+        {
+          text: 'Java 并发实战',
+          collapsible: true,
+          children: [
+            '/java/concurrent4/print-order.md',
+            '/java/concurrent4/print-alternative.md',
+            '/java/concurrent4/singleton.md',
+            '/java/concurrent4/producer-consumer.md',
+            '/java/concurrent4/cache.md',
+            '/java/concurrent4/two-stage-shutdown.md',
+            '/java/concurrent4/protective-pause.md',
           ],
         },
       ],

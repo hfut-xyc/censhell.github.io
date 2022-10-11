@@ -179,9 +179,8 @@ Java 中的原子操作包括：
 
 但是 long, double 变量用 volatile 修饰后，赋值操作的是原子性的
 
-## volatile 关键字
 
-### volatile 内存语义
+## volatile 内存语义
 volatile 用于修饰成员变量或静态变量，主要有两个作用：
 1. 保证变量的内存可见性
 2. 禁止 volatile 变量与普通变量的指令重排序
@@ -201,19 +200,16 @@ volatile 用于修饰成员变量或静态变量，主要有两个作用：
 
 :::
 
-### volatile 底层原理
+volatile 一个典型的应用便是用于懒加载的单例模式
+
+## volatile 底层原理
 
 volatile 底层是通过内存屏障来实现可见性和有序性的
 
-### volatile 单例模式
 
-### volatile vs synchronized
-volatile 只能保证可见性和有序性，不能保证原子性
-
-synchronized 可以保证可见性、有序性和原子性
 
 ## 参考文献
-- [《深入浅出 Java 多线程》第六章 Java内存模型基础知识](http://concurrent.redspider.group/article/02/6.html)
-- [《深入浅出 Java 多线程》第七章 重排序与happens-before](http://concurrent.redspider.group/article/02/7.html)
-- [《深入浅出 Java 多线程》第八章 volatile](http://concurrent.redspider.group/article/02/8.html)
-- [Javadoop-Java 并发基础之内存模型](https://javadoop.com/post/java-memory-model)
+- [《深入浅出 Java 多线程》第6章 Java内存模型基础知识](http://concurrent.redspider.group/article/02/6.html)
+- [《深入浅出 Java 多线程》第7章 重排序与happens-before](http://concurrent.redspider.group/article/02/7.html)
+- [《深入浅出 Java 多线程》第8章 volatile](http://concurrent.redspider.group/article/02/8.html)
+- [Java 并发基础之内存模型-Javadoop](https://javadoop.com/post/java-memory-model)

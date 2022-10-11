@@ -1,16 +1,15 @@
 # 线程池
 
-## 介绍
+## 为什么要用线程池
+1. 降低资源消耗。线程池可以复用已创建的线程，从而避免频繁创建与销毁线程
+2. 提高响应速度。
+3. 可以对线程进行统一管理
 
-### 为什么要使用线程池
-- 线程池可以复用已创建的线程，从而避免反复创建与销毁线程
-- 线程池可以控制并发数量，防止内存占用过多
-- 可以对线程进行统一管理
-
-### 线程池的体系
+## 线程池的体系
 
 线程池的继承体系如下图所示，我们所用的线程池一般是 ThreadPoolExecutor
-<div align="center"><img src="https://s2.loli.net/2022/06/14/twYJGhB81XeuqUk.png"/></div>
+
+![ThreadPool.png](https://s2.loli.net/2022/10/05/7CRZJkAbqH2seGp.png)
 
 ## 线程池的创建
 ### 使用 ThreadPoolExecutor 手动创建
@@ -48,7 +47,7 @@ public ThreadPoolExecutor(int corePoolSize,
 | threadFactory | ThreadFactory            | 线程工厂，用于创建新的线程 |
 | handler       | RejectedExecutionHandler | 线程池拒绝任务时的策略     |
 
-> 关于阻塞队列的详细介绍，可以阅读[这篇文章](./3-container#blockingqueue.md)
+> 关于阻塞队列的详细介绍，可以阅读[这篇文章](./3-container.md#blockingqueue)
 
 ### 使用 Executors 自动创建
 ```java
@@ -86,20 +85,23 @@ public class Executors {
 | ScheduledThreadPool | n            | 2147483647  | 0s        | DelayedWorkQueue    |
 
 
-### 使用建议
-::: tip
+::: warning 创建线程池的方式
 不要用 Executors 去创建，而是通过 ThreadPoolExecutor 的方式，这样的处理方式让人更加明确线程池的运行规则，规避资源耗尽的风险
 - SingleThreadPool、FixedThreadPool 允许的**阻塞队列长度**为 Integer.MAX_VALUE，可能会堆积大量的请求，导致 OOM
 - CachedThreadPool、ScheduledThreadPool 允许的**创建线程数量**为 Integer.MAX_VALUE，可能会创建大量的线程，导致 OOM
 :::
 
-::: tip
-**线程池线程数量的设置**
+::: tip 线程池线程数量的设置
 - CPU 密集型：最佳线程数为 CPU 核心数的 1~2 倍
 - 耗时 IO 型：最佳线程数 = CPU 核心数 * (1 + 平均等待时间 / 平均工作时间)
 :::
 
 ## 线程池的任务执行
+
+线程池的提交任务的逻辑如下图所示
+
+<div align="center"><img src="https://s2.loli.net/2022/06/22/mHWVMk6UNbQsx58.png" >
+</div>
 
 线程池创建子线程的核心方法是 execute，它的声明位于 `Executor` 接口
 ```java
@@ -109,7 +111,7 @@ public interface Executor {
 ```
 
 execute 方法的实现位于 `ThreadPoolExecutor` 类
-```java{15,18}
+```java
 public class ThreadPoolExecutor extends AbstractExecutorService {
     public void execute(Runnable command) {
         if (command == null)
@@ -125,9 +127,11 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
         if (isRunning(c) && workQueue.offer(command)) {
             int recheck = ctl.get();
             // 2.1 如果线程池已关闭，则将该任务从队列中删除并拒绝
+            // 在多线程的环境下，可能会出现任务刚入队，线程池不处于 RUNNING 的情况，此时该任务永远无法执行
             if (!isRunning(recheck) && remove(command))
                 reject(command);
             // 2.2 如果线程池未关闭，并且线程数为 0，创建非核心线程
+            // 这种情况对应是 CachedThreadPool，它只会创建非核心线程
             else if (workerCountOf(recheck) == 0)
                 addWorker(null, false);
         }
@@ -141,15 +145,10 @@ private boolean addWorker(Runnable firstTask, boolean core) {
     // ...
 }
 ```
-::: tip 
-- **2.1 处解释**：在多线程的环境下，可能会出现任务刚入队，线程池不处于 RUNNING 的情况，此时该任务永远无法执行
-- **2.2 处解释**：这种情况对应是 `CachedThreadPool` 的情况，它只会创建非核心线程
-:::
-通过观察 execute 的源码，可知线程池的提交任务的逻辑如下图所示
-<div align="center"><img src="https://s2.loli.net/2022/06/22/mHWVMk6UNbQsx58.png" >
-</div>
 
 ## 线程池的生命周期
+线程池的生命周期如下图所示
+
 
 线程池的生命周期有 5 种状态，每个状态的含义如下表所示
 | State      | Description                                                      |
@@ -160,48 +159,46 @@ private boolean addWorker(Runnable firstTask, boolean core) {
 | TIDYING    | 所有任务都终止，工作线程数为 0                                   |
 | TERMINATED | 调用 `terminate()` 后进入该状态                                  |
 
-线程池的生命周期如下图所示
-
-
-与线程池状态相关的常用函数如下所示
 ```java
 public interface ExecutorService extends Executor {
+    // 线程池进入 SHUTDOWN 状态，执行中和等待中的任务继续执行
     void shutdown();
+    
+    // 线程池进入 STOP 状态，执行中的任务全部中断，等待中的任务全部取消并返回为列表
     List<Runnable> shutdownNow();
+
+    // 只要线程池不在 RUNNING 状态，此方法就返回 true
     boolean isShutdown();
+
+    // 线程池状态是否为 TERMINATED
     boolean isTerminated();
+
+    // 在线程池关闭后，阻塞至所有任务完成或者超时 
     boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException;
 }
 ```
-| Method           | Return  | Description                                                                    |
-| ---------------- | ------- | ------------------------------------------------------------------------------ |
-| shutdown         | void    | 让线程池进入 SHUTDOWN 状态，执行中和等待中的任务会继续执行                     |
-| shutdownNow      | List    | 让线程池进入 STOP 状态，执行中的任务全部中断，等待中的任务全部取消并返回为列表 |
-| isShutdown       | boolean | 判断线程池是否关闭                                                             |
-| isTerminated     | boolean | 判断线程池是否终止                                                             |
-| awaitTermination | boolean | 在线程池关闭后，阻塞至所有任务完成或者超时                                     |
 
 关闭线程池的演示代码如下
 <CodeGroup>
-<CodeGroupItem title="YARN" active>
+<CodeGroupItem title="">
 
 ```java
 
 ```
 </CodeGroupItem>
-<CodeGroupItem title="NPM" >
+<CodeGroupItem title="" >
 
 ```java
 
 ```
 </CodeGroupItem>
-<CodeGroupItem title="NPM" >
+<CodeGroupItem title="" >
 
 ```java
 
 ```
 </CodeGroupItem>
-<CodeGroupItem title="NPM" >
+<CodeGroupItem title="" >
 
 ```java
 
@@ -221,7 +218,21 @@ public interface ExecutorService extends Executor {
 | CallerRunsPolicy    | 反客为主，让提交任务的线程自己处理该任务                    |
 
 
+## 定时任务线程池
+
+```java
+public static void main(String[] args) {
+    Timer timer = new Timer();
+    timer.scheduleAtFixedRate(new TimerTask() {
+        @Override
+        public void run() {
+            System.out.println(Thread.currentThread().getName());
+        }
+    }, 0, 1000);
+}
+```
+
 ## 参考文献
 - [《深入浅出 Java 多线程》第12章-线程池原理](http://concurrent.redspider.group/article/03/12.html)
-- [Javadoop-深度解读 java 线程池设计思想及源码实现](https://javadoop.com/post/java-thread-pool)
+- [深度解读 Java 线程池设计思想及源码实现-Javadoop](https://javadoop.com/post/java-thread-pool)
 - [Java 线程池实现原理及其在美团业务中的实践](https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html)

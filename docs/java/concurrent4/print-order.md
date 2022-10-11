@@ -1,10 +1,8 @@
-# 按序打印 & 交替打印
-## 按序打印
-> [https://leetcode.cn/problems/print-in-order/](https://leetcode.cn/problems/print-in-order/)
-
+# 按序打印
+> https://leetcode.cn/problems/print-in-order/
 
 <CodeGroup>
-<CodeGroupItem title="Ans1" >
+<CodeGroupItem title="Res1" >
 
 ```java
 /**
@@ -50,7 +48,7 @@ public class PrintOrder1 {
 ```
 </CodeGroupItem>
 
-<CodeGroupItem title="Ans2">
+<CodeGroupItem title="Res2">
 
 ```java
 /**
@@ -106,7 +104,7 @@ public class PrintOrder2 {
 ```
 </CodeGroupItem>
 
-<CodeGroupItem title="Ans3">
+<CodeGroupItem title="Res3">
 
 ```java
 /**
@@ -142,7 +140,7 @@ public class PrintOrder3 {
 ```
 </CodeGroupItem>
 
-<CodeGroupItem title="Ans4">
+<CodeGroupItem title="Res4">
 
 ```java
 /**
@@ -172,7 +170,7 @@ public class PrintOrder4 {
 ```
 </CodeGroupItem>
 
-<CodeGroupItem title="Ans5">
+<CodeGroupItem title="Res5">
 
 ```java
 /**
@@ -204,22 +202,3 @@ public class PrintOrder5 {
 </CodeGroup>
 
 
-## 交替打印
-> [https://leetcode.cn/problems/print-foobar-alternately/](https://leetcode.cn/problems/print-foobar-alternately/)
-
-<CodeGroup>
-
-<CodeGroupItem title="Ans1">
-
-```java
-
-```
-</CodeGroupItem>
-
-<CodeGroupItem title="">
-</CodeGroupItem>
-
-<CodeGroupItem title="">
-</CodeGroupItem>
-
-</CodeGroup>

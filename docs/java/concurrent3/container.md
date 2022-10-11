@@ -1,18 +1,17 @@
 # 并发容器
-本文主要介绍几种常用的并发容器：ConcurrentHashMap, 
+本文主要介绍三种常用的并发容器
+- ConcurrentHashMap
+- CopyOnWriteArrayList
+- BlockingQueue 
 
 ## ConcurrentHashMap
-Java 8 之前，ConcurrentHashMap采用`Segment + HashEntry`来实现底层结构：
-
-
+Java 8 之前，采用`Segment + HashEntry`来实现底层结构：
 - 每个ConcurrentHashMap 里包含一个 Segment 数组。
 - 每个 Segment 包含一个 HashEntry 数组，每个 HashEntry 是一个存放链表结构的桶
 - Segment 继承自 ReentrantLock，每个 Segment 守护着一个HashEntry数组里的元素，当对 HashEntry 数组的数据进行修改时，必须先获得对应的 Segment的锁。
-  
 
-在JDK1.8中，ConcurrentHashMap采用**数组+红黑树**来实现底层结构，采用**CAS + Synchronized**来保证并发安全：
-
-- synchronized只锁定当前链表或红黑二叉树的首节点，只要hash不冲突，就不会产生并发，效率又提升N倍
+Java 8 中，采用 `Hash + 红黑树` 来实现底层结构，并采用`CAS + Synchronized`来保证并发安全：
+- synchronized 只锁定当前链表的头结点或红黑树的根结点，只要 hash 值不冲突，就不会产生并发安全问题
 
 ``` java
     final V putVal(K key, V value, boolean onlyIfAbsent) {
