@@ -2,7 +2,7 @@
 > https://leetcode.cn/problems/print-in-order/
 
 <CodeGroup>
-<CodeGroupItem title="Res1" >
+<CodeGroupItem title="Answer1" >
 
 ```java
 /**
@@ -48,7 +48,7 @@ public class PrintOrder1 {
 ```
 </CodeGroupItem>
 
-<CodeGroupItem title="Res2">
+<CodeGroupItem title="Answer2">
 
 ```java
 /**
@@ -104,7 +104,7 @@ public class PrintOrder2 {
 ```
 </CodeGroupItem>
 
-<CodeGroupItem title="Res3">
+<CodeGroupItem title="Answer3">
 
 ```java
 /**
@@ -140,7 +140,7 @@ public class PrintOrder3 {
 ```
 </CodeGroupItem>
 
-<CodeGroupItem title="Res4">
+<CodeGroupItem title="Answer4">
 
 ```java
 /**
@@ -170,7 +170,7 @@ public class PrintOrder4 {
 ```
 </CodeGroupItem>
 
-<CodeGroupItem title="Res5">
+<CodeGroupItem title="Answer5">
 
 ```java
 /**

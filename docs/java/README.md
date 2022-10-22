@@ -3,15 +3,20 @@
 ### Java 基础
 - [Java 语法（上）](./base1/syntax1.md)
 - [Java 语法（下）](./base1/syntax2.md)
-- [Java 8 新特性](./base1/syntax3.md)
+- [Java 8 新特性](./base1/java8.md)
 - [String](./base1/string.md)
 - [Java IO](./base1/io.md)
 - [Java 序列化](./base1/serialize.md)
 
 ### Java 容器
 - [ArrayList](./base2/arraylist.md)
+- [LinkedList](./base2/linkedlist.md)
+- [PriorityQueue](./base2/priority.md)
 - [HashMap](./base2/hashmap.md)
 - [TreeMap](./base2/treemap.md)
+- [HashSet](./base2/hashset.md)
+- [TreeSet](./base2/treeset.md)
+
 
 ## <div align="center">Java Concurrency</div>
 
@@ -28,9 +33,12 @@
 ### Java 并发工具
 - [Atomic](./concurrent3/atomic.md)
 - [ThreadLocal](./concurrent3/threadlocal.md)
-- [并发容器](./concurrent3/container.md)
 - [AQS](./concurrent3/aqs.md)
+- [BlockingQueue](concurrent3/blockingqueue.md)
+- [CopyOnWriteArrayList](./concurrent3/copyonwritearraylist.md)
+- [ConcurrentHashMap](concurrent3/concurrenthashmap.md)
 - [线程池](./concurrent3/threadpool.md)
+- [ForkJoin](./concurrent3/forkjoin.md)
 - [Future](./concurrent3/future1.md)
 - [CompletableFuture](./concurrent3/future2.md)
 
@@ -42,5 +50,6 @@
 - [简易缓存](./concurrent4/cache.md)
 - [两阶段终止](./concurrent4/two-stage-shutdown.md)
 - [保护性暂停](./concurrent4/protective-pause.md)
-- 
+
+
 ## <div align="center">JVM</div>

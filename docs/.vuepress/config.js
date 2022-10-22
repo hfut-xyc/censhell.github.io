@@ -47,6 +47,7 @@ module.exports = {
       {
         text: 'Tool',
         children: [
+          { text: 'Linux', link: '/tool/linux' },
           { text: 'Docker', link: '/tool/etc/docker' },
           { text: 'Maven', link: '/tool/etc/maven' },
           { text: 'NPM', link: '/tool/etc/npm' },
@@ -64,7 +65,7 @@ module.exports = {
           children: [
             '/java/base1/syntax1.md',
             '/java/base1/syntax2.md',
-            '/java/base1/syntax3.md',
+            '/java/base1/java8.md',
             '/java/base1/string.md',
             '/java/base1/io.md',
           ],
@@ -74,8 +75,12 @@ module.exports = {
           collapsible: true,
           children: [
             '/java/base2/arraylist.md',
+            '/java/base2/linkedlist.md',
             '/java/base2/hashmap.md',
             '/java/base2/treemap.md',
+            '/java/base2/concurrenthashmap.md',
+            '/java/base2/hashset.md',
+            '/java/base2/treeset.md',
           ],
         },
         {
@@ -102,8 +107,10 @@ module.exports = {
           children: [
             '/java/concurrent3/atomic.md',
             '/java/concurrent3/threadlocal.md',
-            '/java/concurrent3/container.md',
             '/java/concurrent3/aqs.md',
+            '/java/concurrent3/priorityqueue.md',
+            '/java/concurrent3/blockingqueue.md',
+            '/java/concurrent3/copyonwritearraylist.md',
             '/java/concurrent3/threadpool.md',
             '/java/concurrent3/forkjoin.md',
             '/java/concurrent3/future1.md',

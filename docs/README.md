@@ -15,10 +15,7 @@
 - [ElasticSearch](./db/README.md/#elasticsearch)
 
 ## :gear:Tool
-- [Linux cmd](./tool/linux/cmd.md)
-- [vim cmd](./tool/linux/vim.md)
-- [nohup vs &](./tool/linux/nohup.md)
-- [Ubuntu 20.04 Configuration](./tool/linux/ubuntu.md)
+- [Linux](./tool/linux/README.md)
 - [Git](./tool/etc/git.md)
 - [NPM](./tool/etc/npm.md)
 - [Maven](./tool/etc/maven.md)

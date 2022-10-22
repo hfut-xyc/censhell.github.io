@@ -2,7 +2,7 @@
 
 本文以 Ubuntu 20.04 系统为例，简要介绍一下刚装好的 Linux 应该如何配置
 
-## 更换软件源
+## 换源
 一般来说拿到新系统首先要换源，先备份，然后再修改配置文件
 ```bash
 # 备份后修改配置
@@ -56,27 +56,27 @@ sudo vi /etc/hostname
 sudo vi /etc/default/grub
 ```
 
-## 常用软件安装
-### gcc/g++
+## 安装 gcc/g++
 Ubuntu 默认没有安装 C/C++ 的编译环境
 ```bash
 sudo apt install build-essential
 ```
-### net-tools
+## 安装 net-tools
 Ubuntu 默认没有安装 net-tools，它包含了 **ifconfig、ping、netstat** 等常用的网络工具
 ```bash
 sudo apt install net-tools
 ```
-### openssh-server
+## 安装 openssh-server
 Ubuntu 默认没有安装 openssh-server，安装之后才能用 ssh 远程访问该主机
 ```bash
 sudo apt install openssh-server
 systemctl status ssh
 ```
 
-### oh my zsh
+## 安装 oh my zsh
+
+首先安装 zsh
 ```bash
-# 首先安装 zsh
 sudo apt install zsh
 # 检查 zsh 是否安装成功
 cat /etc/shells
@@ -84,12 +84,15 @@ cat /etc/shells
 chsh -s /bin/zsh
 # 检查 zsh 是否切换成功
 echo $SHELL
+```
 
-# 再安装 oh my zsh，确保安装了 Git，否则会安装失败
+再安装 oh my zsh，确保安装了 [Git](../etc/git.md)，否则会安装失败
+```bash
 wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 sh install.sh
-
-# 下载 incr 插件（命令行自动补全，可选）
+```
+安装 incr 插件，可以让命令支持自动补全（可选）
+```bash
 cd ~/.oh-my-zsh/plugins/
 mkdir incr & cd incr
 wget http://mimosa-pudica.net/src/incr-0.2.zsh
@@ -101,15 +104,16 @@ source ~/.oh-my-zsh/plugins/incr/incr*.zsh
 source ~/.zshrc
 ```
 
-### Java
-- 如果是虚拟机或者云服务器，可以先在 Windows 下载 [JDK1.8压缩包](https://pan.baidu.com/s/1zjriuEPC4pXF92lm1Ql0TQ) (提取码：jdk8)
-- 然后将压缩包通过 [XFTP](https://www.xshell.com/zh/free-for-home-school/) 传到 /home/USERNAME 目录下
+## 安装 Java
+如果你的 Ubuntu 是虚拟机或者云服务器，可以先在 Windows 下载 [JDK1.8压缩包](https://pan.baidu.com/s/1zjriuEPC4pXF92lm1Ql0TQ) (提取码：jdk8)
+
+然后将压缩包通过 [XFTP](https://www.xshell.com/zh/free-for-home-school/) 传到 /home/USERNAME 目录下
 ```bash
 # 将压缩包解压到 /usr/local 目录下
 sudo mv ~/jdk-8u241-linux-x64.tar.gz /usr/local
 sudo tar -zxvf jdk-8u241-linux-x64.tar.gz
 
-# 全局配置  
+# 全局配置（和局部配置二选一）
 sudo vi /etc/profile
 
 # 局部配置
@@ -122,14 +126,4 @@ export PATH=$PATH:$JAVA_HOME/bin
 # 让配置生效
 source ~/.bashrc
 ```
-
-### 常用文件、目录
-- /etc/hostname
-- /etc/hosts
-- /etc/passwd
-- /etc/sudoers
-- /etc/profile：全局环境变量
-- /etc/shells
-- /etc/apt
-
 

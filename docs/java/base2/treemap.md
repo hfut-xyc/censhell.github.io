@@ -169,4 +169,3 @@ private void rotateRight(Entry<K,V> p) {
     }
 }
 ```
-# HashTable

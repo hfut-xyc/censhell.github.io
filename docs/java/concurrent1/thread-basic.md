@@ -37,8 +37,8 @@ public class ThreadCreation {
     }
 
     public static void main(String[] args) {
-        Thread t1 = new MyThread();
-        t1.start();
+        Thread t = new MyThread();
+        t.start();
     }
 }
 ```
@@ -50,10 +50,10 @@ public class ThreadCreation {
 public class ThreadCreation {
     
     public static void main(String[] args) {
-        Thread t2 = new Thread(() -> {
+        Thread t = new Thread(() -> {
             System.out.println(Thread.currentThread().getName());
         });
-        t2.start();
+        t.start();
     }
 }
 ```

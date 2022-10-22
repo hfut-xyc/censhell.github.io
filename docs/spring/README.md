@@ -10,9 +10,9 @@
 - [SpringBoot 异步/定时任务](./springboot/aysnc-schedule.md)
 - [SpringBoot Event](./springboot/event.md)
 - [SpringBoot 文件上传](./springboot/file.md)
+- [SpringBoot 实现有状态登录](./springboot/login1.md)
+- [SpringBoot+JWT 实现无状态登录](./springboot/login2.md)
 - [SpringBoot 自动装配原理](./springboot/starter.md)
-- [SpringBoot 有状态登录](./springboot/login1.md)
-- [SpringBoot+JWT 无状态登录](./springboot/login2.md)
 
 ### SpringCloud
 - [SpringCloud+JWT 实现无状态登录](./springcloud/login.md)

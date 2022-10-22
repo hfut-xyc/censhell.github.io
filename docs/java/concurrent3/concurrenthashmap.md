@@ -1,10 +1,4 @@
-# 并发容器
-本文主要介绍三种常用的并发容器
-- ConcurrentHashMap
-- CopyOnWriteArrayList
-- BlockingQueue 
-
-## ConcurrentHashMap
+# ConcurrentHashMap
 Java 8 之前，采用`Segment + HashEntry`来实现底层结构：
 - 每个ConcurrentHashMap 里包含一个 Segment 数组。
 - 每个 Segment 包含一个 HashEntry 数组，每个 HashEntry 是一个存放链表结构的桶
@@ -77,7 +71,3 @@ Java 8 中，采用 `Hash + 红黑树` 来实现底层结构，并采用`CAS + S
         return null;
     }
 ```
-
-## CopyOnWriteArrayList
-
-## BlockingQueue

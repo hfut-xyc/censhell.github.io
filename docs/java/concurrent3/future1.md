@@ -33,14 +33,40 @@ public interface Future<V> {
     boolean isDone();
 }
 ```
-::: tip get
-如果要获取异步任务的结果，可以在主线程调用 `get()`，此时有以下几种情况：
+::: tip get() / get(long, TimeUnit)
+如果当前线程要获取异步任务的结果，可以在**当前线程**调用 `get()`，此时有以下几种情况：
 - 如果任务已经完成，就直接获得结果
-- 如果任务还未完成，主线程就会阻塞，直到任务完成后才返回结果
+- 如果任务还在执行，当前线程会阻塞，直到任务完成后才返回结果
 - 如果任务执行时抛出异常，会抛出 `ExecutionException`
 - 如果任务已经被取消，会抛出 `CancellationException`
-- 如果任务很耗时，可以用重载的 `get()` 限时等待，一旦超时就会抛出 `TimeoutException`，从而防止主线程一直阻塞
+- 如果当前线程在等待结果时被中断，会抛出 `InterruptedException`
+
+如果任务很耗时，可以用 `get(long, TimeUnit)` 限时等待结果，一旦超时会抛出 `TimeoutException`
 :::
+
+下面演示几种 get 的使用情景
+<CodeGroup>
+<CodeGroupItem title="任务正常" active>
+
+```java{9}
+
+```
+</CodeGroupItem>
+<CodeGroupItem title="任务异常">
+
+子线程并非一产生异常就抛出，而是调用 get 时才会抛出
+```java{4}
+
+```
+</CodeGroupItem>
+<CodeGroupItem title="限时等待">
+
+```java{13,17}
+
+```
+</CodeGroupItem>
+
+</CodeGroup>
 
 ::: tip cancel
 如果想取消任务，可以调用 `cancel()`，此时有以下几种情况：
@@ -49,92 +75,12 @@ public interface Future<V> {
 - 如果任务正在执行，会根据参数 `mayInterruptIfRunning` 做判断
 :::
 
-下面演示几种 Future 的使用方法
-<CodeGroup>
-<CodeGroupItem title="阻塞等待" active>
+<CodeGroupItem title="任务取消" active>
 
 ```java{9}
-public void test1() throws ExecutionException, InterruptedException {
-    ExecutorService executor = Executors.newFixedThreadPool(4);
-    Future<String> future = executor.submit(() -> {
-        Thread.sleep(2500);
-        return Thread.currentThread().getName();
-    });
 
-    System.out.println(future.isDone());    // false
-    String result = future.get();           
-    System.out.println(future.isDone());    // true
-    System.out.println(result);
-    executor.shutdown();
-}
 ```
 </CodeGroupItem>
-<CodeGroupItem title="抛出异常">
-
-```java{4}
-public void test2() {
-    ExecutorService executor = Executors.newFixedThreadPool(4);
-    Future<String> future = executor.submit(() -> {
-        int i = 1 / 0;
-    });
-    try {
-        Thread.sleep(1500);
-        future.get();   // 子线程并非一产生异常就抛出，而是调用 get 时才会抛出
-    } catch (InterruptedException | ExecutionException e) {
-        e.printStackTrace();
-    }
-    executor.shutdown();
-}
-```
-</CodeGroupItem>
-<CodeGroupItem title="限时等待">
-
-```java{13,17}
-public void test3() {
-    ExecutorService executor = Executors.newFixedThreadPool(4);
-    Future<String> future = executor.submit(() -> {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-        }
-        return Thread.currentThread().getName();
-    });
-
-    try {
-        String result = future.get(1000, TimeUnit.MILLISECONDS);
-    } catch (InterruptedException | ExecutionException e) {
-        e.printStackTrace();
-    } catch (TimeoutException e) {
-        boolean cancel = future.cancel(true);
-        System.out.println(cancel);
-    }
-    executor.shutdown();
-}
-```
-</CodeGroupItem>
-<CodeGroupItem title="批量执行" active>
-
-```java{9}
-public void test4() throws ExecutionException, InterruptedException {
-    ExecutorService executor = Executors.newFixedThreadPool(4);
-    List<Future<String>> futures = new ArrayList<>();
-    for (int i = 0; i < 20; i++) {
-        Future<String> future = executor.submit(() -> {
-            Thread.sleep(500);
-            return Thread.currentThread().getName();
-        });
-        futures.add(future);
-    }
-
-    for (Future future : futures) {
-        System.out.println(future.get());
-    }
-    executor.shutdown();
-}
-```
-</CodeGroupItem>
-</CodeGroup>
 
 ## FutureTask
 
@@ -168,8 +114,8 @@ public void test5() throws ExecutionException, InterruptedException {
 }
 ```
 
-## submit or execute
-在[上一篇文章](./3-threadpool.md)中，线程池提交任务都是用 execute，但是在本文中换成了 submit
+## submit vs execute
+在[上一篇文章](./threadpool.md)中，线程池提交任务都是用 execute，但是在本文中换成了 submit
 
 它既能提交 Runnable，也能提交 Callable，且返回均为 Future 对象，但本质上还是要调用 execute
 

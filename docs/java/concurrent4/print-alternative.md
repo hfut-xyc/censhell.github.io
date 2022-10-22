@@ -3,7 +3,7 @@
 
 <CodeGroup>
 
-<CodeGroupItem title="Res1">
+<CodeGroupItem title="Answer1">
 
 ```java
 

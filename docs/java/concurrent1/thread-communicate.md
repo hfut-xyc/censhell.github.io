@@ -1,13 +1,15 @@
 # 多线程通信
 
-## Object-wait/notify
+## Object
+wait/notify
 
 
-## Condition-await/signal
+## Condition
+await/signal
 
 
-## LockSupport-park/unpark
-
+## LockSupport
+park/unpark
 
 
 ## sleep 和 wait 的区别
