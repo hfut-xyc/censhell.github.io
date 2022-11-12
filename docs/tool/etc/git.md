@@ -2,18 +2,21 @@
 
 ## 安装与配置
 ```bash
-# 安装
+# 安装 git
 sudo apt install git
 
 # 全局配置用户名和邮箱
 git config --global user.name YOUR_GITHUB_USERNAME
 git config --global user.email YOUR_GITHUB_EMAIL
 
-# 查看所有配置
+# 查看是否配置成功
 git config -l
 
 # 生成公钥和私钥对
 ssh-gen -t rsa -C "YOUR_GITHUB_EMAIL"
+
+# 检测是否能正常连接
+ssh -T git@github.com
 ```
 
 ## git remote

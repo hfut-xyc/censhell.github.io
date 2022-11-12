@@ -1,12 +1,14 @@
 ## <div align="center">Java Base</div>
 
 ### Java 基础
-- [Java 语法（上）](./base1/syntax1.md)
-- [Java 语法（下）](./base1/syntax2.md)
-- [Java 8 新特性](./base1/java8.md)
-- [String](./base1/string.md)
+- [Java 数据类型](./base1/data-type.md)
+- [Java 参数传递](./base1/pass-arg.md)
+- [Java 面向对象](./base1/oop.md)
+- [Java 日期时间](./base1/date.md)
+- [Java 字符串](./base1/string.md)
 - [Java IO](./base1/io.md)
 - [Java 序列化](./base1/serialize.md)
+- [Lambda 表达式](./base1/lambda.md)
 
 ### Java 容器
 - [ArrayList](./base2/arraylist.md)

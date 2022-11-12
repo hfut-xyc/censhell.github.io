@@ -2,16 +2,16 @@
 
 ## 事务的ACID特性
 
-- **Atomicity(原子性)：**
-- **Consistency(一致性)：**
-- **Isolation(隔离性)：**
-- **Durability(持久性)：**
+- Atomicity(原子性)：
+- Consistency(一致性)：
+- Isolation(隔离性)：
+- Durability(持久性)：
 
 ## 事务的并发问题
 
-- **脏读（Dirty Read）：**
-- **不可重复读（Unrepeatable Read）：**
-- **幻读（Phantom Read）：**不可重复读重点在于update和delete，而幻读的重点在于insert
+- 脏读（Dirty Read）
+- 不可重复读（Unrepeatable Read）
+- 幻读（Phantom Read）：不可重复读重点在于update和delete，而幻读的重点在于insert
 - 第一类更新丢失，第二类更新丢失
 
 ## 事务的隔离级别

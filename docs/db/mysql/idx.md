@@ -1,20 +1,18 @@
 # MySQL 索引
 
-## 存储引擎
-
-### InnoDB存储引擎
+## InnoDB存储引擎
 
 - InnoDB的主键索引采用的是聚集索引，叶子节点存放的是索引值和对应的数据记录
 - InnoDB的辅助索引采用的是非聚集索引，叶子节点存放的是索引值和对应的主键
 - 使用InnoDB引擎的数据表，**.ibd**文件包含了该表的索引和数据
 
-### MyISAM存储引擎
+## MyISAM存储引擎
 
 - MyISAM采用的是非聚集索引，即索引文件和数据文件是分离的
 - 无论是主键索引还是辅助索引，叶子节点存放的都是索引值和对应数据的磁盘地址
 - 使用MyISAM引擎的数据表，**.MYI**文件存放了表的索引，**.MYD**文件存放了表的数据记录
 
-### InnoDB和MyISAM的查找过程 
+## InnoDB和MyISAM的查找过程 
 
 ![](https://hfut-xyc.gitee.io/image/mysql-search.png)
 

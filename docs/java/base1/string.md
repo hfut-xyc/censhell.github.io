@@ -1,7 +1,6 @@
-# String
+# Java 字符串
 
 ## String 存储形式
-
 Java 8 中，String 使用 `char[]` 存储字符串
 ```java
 public final class String 
@@ -11,6 +10,7 @@ public final class String
     // ...
 }
 ```
+
 Java 9 之后 String 改用 `byte[]` 存储，并用 `coder` 来标识使用了哪种编码
 ```java
 public final class String 
