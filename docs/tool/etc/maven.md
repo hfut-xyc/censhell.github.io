@@ -2,10 +2,12 @@
 Maven 主要用于 Java 的项目构建、依赖管理、打包发布
 
 ## 安装与配置
-下面演示如何在 Ubuntu 20.04 上安装 maven
-```bash
-tar -zxvf 
 
+前往[官方下载页面](https://archive.apache.org/dist/maven/maven-3/3.6.1/binaries/)
+- Win10 下载 apache-maven-3.6.1-bin.zip，解压后到 D:/，配置环境变量
+- Ubuntu 下载 apache-maven-3.6.1-bin.tar.gz，解压后到 D:/，配置环境变量
+
+```bash
 mvn -v
 ```
 ## 常用命令

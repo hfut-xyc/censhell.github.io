@@ -1,4 +1,4 @@
-# 命令行使用 nohup 与 & 的区别
+# nohup
 
 ## 普通情况
 首先编写一个简单的python程序：每隔 1s 打印一个 helloworld
