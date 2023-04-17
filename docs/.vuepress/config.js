@@ -2,14 +2,13 @@ const { defaultTheme } = require('@vuepress/theme-default')
 
 const { shikiPlugin } = require('@vuepress/plugin-shiki')
 const { searchPlugin } = require('@vuepress/plugin-search')
-const { googleAnalyticsPlugin } = require('@vuepress/plugin-google-analytics')
 
 
 module.exports = {
   title: 'Terminote',
   head: [['link', { rel: 'icon', href: '/logo.png' }]],
   open: true,
-  base: '/',
+  basic: '/',
   plugins: [
     shikiPlugin({
       theme: 'dark-plus'
@@ -35,11 +34,7 @@ module.exports = {
         text: 'Index', link: '/'
       },
       {
-        text: 'Java',
-        children: [
-          { text: 'JDK', link: '/java/' },
-          { text: 'Spring', link: '/spring/' },
-        ]
+        text: 'Java', link: '/java'
       },
       {
         text: 'Database',link:  '/db'
@@ -63,27 +58,27 @@ module.exports = {
           text: 'Java 基础',
           collapsible: true,
           children: [
-            '/java/base1/data-type.md',
-            '/java/base1/oop.md',
-            '/java/base1/date.md',
-            '/java/base1/pass-arg.md',
-            '/java/base1/string.md',
-            '/java/base1/io.md',
-            '/java/base1/serialize.md',
-            '/java/base1/lambda.md',
+            '/java/basic/data-type.md',
+            '/java/basic/oop.md',
+            '/java/basic/date.md',
+            '/java/basic/pass-arg.md',
+            '/java/basic/string.md',
+            '/java/basic/io.md',
+            '/java/basic/serialize.md',
+            '/java/basic/lambda.md',
           ],
         },
         {
           text: 'Java 容器',
           collapsible: true,
           children: [
-            '/java/base2/arraylist.md',
-            '/java/base2/linkedlist.md',
-            '/java/base2/priorityqueue.md',
-            '/java/base2/hashmap.md',
-            '/java/base2/treemap.md',
-            '/java/base2/hashset.md',
-            '/java/base2/treeset.md',
+            '/java/collection/arraylist.md',
+            '/java/collection/linkedlist.md',
+            '/java/collection/priorityqueue.md',
+            '/java/collection/hashmap.md',
+            '/java/collection/treemap.md',
+            '/java/collection/hashset.md',
+            '/java/collection/treeset.md',
           ],
         },
         {

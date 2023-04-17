@@ -2,7 +2,7 @@
 
 ## 安装与配置
 
-Win10 安装直接去官网[下载 exe 安装包](https://git-scm.com/download/win)
+Win10 安装直接去官网[下载 exe 安装包](https://git-scm.com/download/win)，然后运行即可
 
 Ubuntu 安装直接运行如下命令
 ```bash
@@ -32,13 +32,14 @@ ssh-keygen -t rsa -C "YOUR_GITHUB_EMAIL"
 ssh -T git@github.com
 ```
 
-## git remote
+## 仓库初始化
 
 ```bash
 git remote add origin 'git@github.com:XXX/YYY.git'
 git remote rm origin 'git@github.com:XXX/YYY.git'
 git remote set-url origin 'git@github.com:XXX/YYY.git'
 
+git config -e
 ```
 
 ## git log
