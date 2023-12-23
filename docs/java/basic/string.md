@@ -24,23 +24,6 @@ public final class String
     private final byte coder;
 }
 ```
-## 常见面试题
-::: tip Q1
-**为什么 String 是不可变的**
-- value 数组被 final 修饰且为私有的，并且 String 内部没有提供修改数组的方法
-- String 类被 final 修饰导致其不能被继承，从而避免了子类的修改
-:::
-
-::: tip Q2
-**为什么 Java 9 之后 String 改用 byte[]**
-:::
-
-::: tip Q3
-**String vs StringBuilder vs StringBuffer**
-- String 不可变，StringBuilder, StringBuffer 可变
-- String 线程安全，StringBuilder 线程不安全，StringBuffer 线程安全
-:::
-
 ## String 拼接
 
 一般来说，如果涉及大量字符串拼接操作，建议使用 StringBuilder

@@ -26,11 +26,8 @@ http://localhost:8081/list?str=A&str=B&str=C
 
 接收 Map 参数
 
-## @RequestHeader
 
 ## @PathVariable
-
-
 
 ## RequestContextHolder
 
