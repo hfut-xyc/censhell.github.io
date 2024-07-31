@@ -14,7 +14,7 @@ export default defineConfig({
     siteTitle: 'Terminote',
     // 顶部导航栏
     nav: [
-      { text: '银行从业', link: '/bank' },
+      // { text: '银行从业', link: '/bank' },
     ],
     // 侧边栏
     sidebar: [
@@ -22,8 +22,8 @@ export default defineConfig({
         text: '银行从业',
         collapsed: false,
         items: [
-          { text: '综合能力与法律法规', link: '' },
-          { text: '个人理财', link: '' },
+          { text: '法律法规+综合能力', link: '/bank/base' },
+          { text: '个人理财', link: '/bank/personal_financing' },
         ]
       }
     ],
@@ -31,10 +31,16 @@ export default defineConfig({
     outline: 'deep',
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/hfut-xyc' }
+      { icon: 'github', link: 'https://github.com/hfut-xyc/hfut-xyc.github.io' },
+      { icon: '', link: 'https://vitepress.dev/zh/' }
     ],
     search: {
       provider: 'local'
-    }
+    },
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2024-present CenShell'
+    },
+    lastUpdated: true
   }
 })
