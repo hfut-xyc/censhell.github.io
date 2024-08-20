@@ -3,24 +3,24 @@
 layout: home
 
 hero:
-  name: "银行从业知识总结"
-  text: "Summary of CCBP"
+  name: "TODO"
+  text: "TODO"
   tagline: to be continued...
   image:
     src: /vitepress-logo-large.webp
     alt: VitePress
   actions:
     - theme: brand
-      text: 法律法规+综合能力
-      link: /bank/base
+      text: TODO1
+      link: /
     - theme: alt
-      text: 个人理财
-      link: /bank/personal_financing
+      text: TODO2
+      link: /
 
 features:
   - icon: 📝
-    title: 银行从业资格考试
-    details: Under Construction
+    title: TODO
+    details: TODO
   - icon: ⏳
     title: TODO
     details: TODO

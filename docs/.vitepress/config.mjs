@@ -14,16 +14,15 @@ export default defineConfig({
     siteTitle: 'Terminote',
     // 顶部导航栏
     nav: [
-      // { text: '银行从业', link: '/bank' },
+      { text: 'todo', link: '/' },
     ],
     // 侧边栏
     sidebar: [
       {
-        text: '银行从业',
+        text: 'Item',
         collapsed: false,
         items: [
-          { text: '法律法规+综合能力', link: '/bank/base' },
-          { text: '个人理财', link: '/bank/personal_financing' },
+          { text: 'SubItem', link: '/' },
         ]
       }
     ],
