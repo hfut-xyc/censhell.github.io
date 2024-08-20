@@ -14,7 +14,7 @@ export default defineConfig({
     siteTitle: 'Terminote',
     // 顶部导航栏
     nav: [
-      { text: 'todo', link: '/' },
+      { text: 'Vite', link: 'https://vitepress.dev/zh/' },
     ],
     // 侧边栏
     sidebar: [
@@ -31,7 +31,6 @@ export default defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/hfut-xyc/hfut-xyc.github.io' },
-      { icon: '', link: 'https://vitepress.dev/zh/' }
     ],
     search: {
       provider: 'local'
